@@ -50,9 +50,4 @@ bash scripts/deploy.sh                                            # 4 部署
   273/301 处替换生效），并修正了迁移引入的误伤。
 - 部署位置 `~/.opencode/bin` 已在用户 `~/.zshrc` 的 PATH 中。
 
-## 网络备忘（本机环境）
-
-- `github.com` 直连超时；`codeload.github.com`、`raw.githubusercontent.com`、`api.github.com` 可直连。
-- 系统代理 `127.0.0.1:7892`（HTTP/HTTPS/SOCKS），需要时：
-  `export https_proxy=http://127.0.0.1:7892 http_proxy=http://127.0.0.1:7892`
-- go 依赖（proxy.golang.org）与 bun install 失败时记得走代理。
+> 本机环境细节（网络、工具链、构建目录）见 `docs/environment.md`。
