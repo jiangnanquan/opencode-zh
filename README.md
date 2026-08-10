@@ -21,7 +21,7 @@
 git clone https://github.com/jiangnanquan/opencode-zh.git ~/.claude/skills/opencode-zh
 # 之后对话中可直接用 /opencode-zh 触发
 
-# 方式二：本机直接使用（不依赖 Claude Code）
+# 方式二：本地直接使用（不依赖 Claude Code）
 git clone https://github.com/jiangnanquan/opencode-zh.git
 cd opencode-zh
 bash scripts/build-tool.sh   # 编译汉化工具（需 go）
@@ -56,9 +56,12 @@ opencode-zh/                  ← skill 根目录
 └── PITFALLS.md               踩坑记录与故障排查
 ```
 
-## 限制
+## 限制与通用性
 
-- 仅构建 macOS Apple Silicon（darwin-arm64）——本仓库定位为个人/小团队使用
+- **汉化包与全部文档平台无关**：任何操作系统上的 agent 都能维护配置、执行误伤甄别
+- **构建产物**：当前脚本产出 macOS Apple Silicon（darwin-arm64）——这是本仓库的默认目标；
+  其他平台（linux-x64 等）只需修改 `scripts/localize.sh` 中的 `--platform` 参数即可，
+  但需自行验证构建工具链兼容性
 - 汉化覆盖 CLI/TUI 主要界面；命令描述等次要文本可能未全覆盖（欢迎 PR 补充）
 - 模型名与专有概念（如 Warp）按约定不汉化
 

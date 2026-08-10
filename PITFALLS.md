@@ -34,8 +34,8 @@ SIGKILL（`zsh: killed`、崩溃报告 `Taskgated Invalid Signature`）。
 会失败。必须设置 `OPENCODE_VERSION=<版本号>` 环境变量跳过。
 
 ### 7. 跨平台交叉构建不可行
-bun 1.3.8 无 `windows-aarch64` target，`bun install` 解析失败。只构建本机
-平台（darwin-arm64）。
+bun 1.3.8 无 `windows-aarch64` target，`bun install` 解析失败。只构建
+当前平台（darwin-arm64）。
 
 ## 故障排查
 

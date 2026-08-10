@@ -14,7 +14,7 @@
 **产出**：
 1. 汉化配置包（JSON 规则集，位于 `opencode-i18n/`）
 2. 汉化后的 opencode 二进制（darwin-arm64）
-3. 部署到 `~/.opencode/bin/opencode`（用户 `.zshrc` 已配置该目录）
+3. 部署到 `~/.opencode/bin/opencode`（该目录需在 PATH 中）
 
 **版本策略**：版本号严格跟随官方（当前官方 dev 分支 = v1.18.16）。
 汉化版 `opencode --version` 显示官方版本号，不发明任何自己的版本号。
@@ -68,9 +68,9 @@ v1.18.x 已重构为独立包 `packages/tui/src/`。**不要按旧路径找文�
 
 | 工具 | 来源 | 用途 |
 |---|---|---|
-| `tools/opencode-cli` | 汉化项目 `1186258278/OpenCodeChineseTranslation` 的 `cli-go` 本地编译（Go 1.26+） | `apply` 应用汉化、`build` 本地构建 |
-| bun | 本机 `bun 1.3.13+` | opencode 官方构建工具链 |
-| go | 本机 `go 1.26+` | 编译 opencode-cli（仅首次需要） |
+| `tools/opencode-cli` | 汉化项目 `1186258278/OpenCodeChineseTranslation` 的 `cli-go` 编译产物 | `apply` 应用汉化、`build` 本地构建 |
+| bun | 版本 ≥1.3（与官方构建要求兼容即可） | opencode 官方构建工具链 |
+| go | 版本 ≥1.26 | 编译 opencode-cli（仅首次需要） |
 
 opencode-cli 关键命令：
 ```bash
@@ -104,9 +104,8 @@ tar xzf opencode-dev.tar.gz
 grep '"version"' opencode-dev/packages/cli/package.json
 ```
 
-> 网络提示：本机 `github.com` 直连超时，但 `codeload.github.com`、
-> `raw.githubusercontent.com`、`api.github.com`、`release-assets.githubusercontent.com` 可直连；
-> 另有 macOS 系统代理 `127.0.0.1:7892`（HTTP/HTTPS/SOCKS），需要时 `export https_proxy=http://127.0.0.1:7892 http_proxy=http://127.0.0.1:7892`。
+> 网络提示：下载源码走 `codeload.github.com`（`github.com` 在部分地区可能直连超时，
+> 此时请自行配置 HTTP 代理环境变量后重试，如 `export https_proxy=http://<代理>:<端口>`）。
 
 ### 4.2 生成/更新汉化配置（核心步骤）
 
@@ -127,7 +126,7 @@ grep '"version"' opencode-dev/packages/cli/package.json
 ### 4.3 应用汉化
 
 ```bash
-OPENCODE_PROJECT_DIR=/Users/jnq/Dev/Private/opencode-zh \
+OPENCODE_PROJECT_DIR=<skill 目录> \
 OPENCODE_SOURCE_DIR=<官方源码> \
   tools/opencode-cli apply
 ```
@@ -160,7 +159,7 @@ diff -rq ~/opencode-zh-build/opencode-clean/opencode-dev/packages \
 ### 4.5 本地构建
 
 ```bash
-OPENCODE_PROJECT_DIR=/Users/jnq/Dev/Private/opencode-zh \
+OPENCODE_PROJECT_DIR=<skill 目录> \
 OPENCODE_SOURCE_DIR=<官方源码> \
 OPENCODE_VERSION=<官方版本号，如 1.18.16> \
   tools/opencode-cli build --platform darwin-arm64 --deploy=false
@@ -171,7 +170,7 @@ OPENCODE_VERSION=<官方版本号，如 1.18.16> \
   `git branch --show-current` 检测 channel，没有它直接报 "不是 git 仓库"。
   填官方版本号后 channel=latest，且产物版本号跟随官方。
 - bun 版本检查：构建工具自动 patch `packages/script/src/index.ts` 放宽版本检查
-  （本机 bun 1.3.13 可满足官方要求 ^1.3.14 的场景会打印 warning，正常）。
+  （bun 版本略低于官方要求时会打印 warning，属正常，可继续构建）。
 - 依赖安装：首次构建 `bun install` 约 1-2 分钟（4693 packages）；网络必要时走代理。
 - 产物路径：`<源码>/packages/opencode/dist/opencode-darwin-arm64/bin/opencode`。
 
@@ -223,8 +222,8 @@ chmod +x ~/.opencode/bin/opencode
    GitHub Actions nightly 流水线的 diff 计算用 `git clone --depth 200` 浅克隆 +
    `git rev-list --count`，上游 commit 数超过 200 后 rev-list 必然失败，
    错误被 `|| echo "0"` 吞掉 → COMMIT_COUNT 恒为 0 → 永久跳过构建（2026-03-11 起）。
-   若 fork 修复：用 GitHub API `compare` 接口替代 rev-list 即可（本 SOP 维护者 fork
-   `jiangnanquan/OpenCodeChineseTranslation` 已修复，含 darwin-arm64 精简矩阵）。
+   若需修复：用 GitHub API `compare` 接口替代 rev-list 即可（社区已有修复版 fork，
+   或按此思路自行修复）。
 2. **旧汉化配置失效原因**：旧版 TUI 在 `packages/opencode/src/cli/cmd/tui/`，
    v1.18.x 重构为独立包 `packages/tui/src/`，文件路径全变但**界面文案大多保留**
    ——迁移命中率实测 77%（308/405），自动迁移 + 人工补写即可。
@@ -245,23 +244,22 @@ chmod +x ~/.opencode/bin/opencode
 
 ---
 
-## 7. 本机环境备忘
+## 7. 环境要求
 
-> 内部信息，不面向公开仓库读者（README 不展示）。
+**软件**：
+- bun ≥1.3（opencode 官方构建工具链；版本略低于官方要求时构建工具会自动放宽检查）
+- go ≥1.26（仅首次编译 `tools/opencode-cli` 时需要）
+- curl / tar（下载与解压官方源码）
 
 **网络**：
-- `github.com` 直连超时（被限制）；可直连：`codeload.github.com`、`raw.githubusercontent.com`、
-  `api.github.com`、`release-assets.githubusercontent.com`
-- macOS 系统代理 `127.0.0.1:7892`（HTTP/HTTPS/SOCKS），shell 未默认启用，需要时：
-  `export https_proxy=http://127.0.0.1:7892 http_proxy=http://127.0.0.1:7892`
-- 需要代理的场景：go 依赖下载（proxy.golang.org 被墙）、`bun install` 失败或极慢、
-  `gh` 设备码授权（github.com/login/device）
+- 必须可访问：`codeload.github.com`（源码下载）、`raw.githubusercontent.com`、
+  `api.github.com`、npm registry（`bun install`）
+- 部分地区 `github.com` 直连超时 → 自行配置代理后重试
 
-**工具链**：bun 1.3.13（fnm）、go 1.26.4（/opt/homebrew/bin/go）、
-gh CLI 已登录（jiangnanquan，token 含 repo/workflow/admin:public_key）
-
-**构建目录**：官方源码 `~/opencode-zh-build/opencode-dev`（dev 分支 tarball 解压）；
-干净副本（误伤对比用）`~/opencode-zh-build/opencode-clean/opencode-dev`；构建日志 `/tmp/opencode-build-full.log`
+**约定目录**（脚本默认值，可按需修改）：
+- `~/opencode-zh-build/` — 官方源码下载与解压目录（含 `opencode-dev/` 源码、
+  `opencode-clean/` 干净副本）
+- `~/.opencode/bin/` — 汉化版部署目录（需加入 PATH）
 
 ---
 
@@ -269,7 +267,7 @@ gh CLI 已登录（jiangnanquan，token 含 repo/workflow/admin:public_key）
 
 ```bash
 # 全部流程（源码已下载并解压到 ~/opencode-zh-build/opencode-dev 时）
-export OPENCODE_PROJECT_DIR=/Users/jnq/Dev/Private/opencode-zh
+export OPENCODE_PROJECT_DIR=<skill 目录>
 export OPENCODE_SOURCE_DIR=~/opencode-zh-build/opencode-dev
 export OPENCODE_VERSION=1.18.16            # ← 每次换源码版本时更新！
 
