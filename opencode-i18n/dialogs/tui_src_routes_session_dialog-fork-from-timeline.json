@@ -1,0 +1,7 @@
+{
+  "file": "packages/tui/src/routes/session/dialog-fork-from-timeline.tsx",
+  "description": "人工补充: 遗漏 UI 文本",
+  "replacements": {
+    "title=\"Fork session\"": "title=\"复制会话\""
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "file": "packages/tui/src/feature-plugins/system/plugins.tsx",
+  "description": "自动迁移: packages/tui/src/feature-plugins/system/plugins.tsx",
+  "replacements": {
+    "title: \"toggle\"": "title: \"切换\"",
+    "title=\"Install plugin\"": "title=\"安装插件\"",
+    "title=\"Plugins\"": "title=\"插件\"",
+    "placeholder=\"npm package name\"": "placeholder=\"npm 包名\""
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "file": "packages/tui/src/routes/home.tsx",
+  "description": "人工补充: 遗漏 UI 文本",
+  "replacements": {
+    "\"Fix a TODO in the codebase\"": "\"修复代码库中的一个 TODO\"",
+    "\"What is the tech stack of this project?\"": "\"这个项目用了什么技术栈？\"",
+    "\"Fix broken tests\"": "\"修复失败的测试\""
+  }
+}

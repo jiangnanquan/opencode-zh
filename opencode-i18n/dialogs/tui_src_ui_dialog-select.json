@@ -5,6 +5,11 @@
     "<text fg={theme.textMuted}>No results found</text>": "<text fg={theme.textMuted}>未找到结果</text>",
     "placeholder={props.placeholder ?? \"Search\"}": "placeholder={props.placeholder ?? \"搜索\"}",
     "title: \"Page down\"": "title: \"向下翻页\"",
-    "title: \"Page up\"": "title: \"向上翻页\""
+    "title: \"Page up\"": "title: \"向上翻页\"",
+    "title: \"Previous item\"": "title: \"上一项\"",
+    "title: \"Next item\"": "title: \"下一项\"",
+    "title: \"First item\"": "title: \"第一项\"",
+    "title: \"Last item\"": "title: \"最后一项\"",
+    "title: \"Select item\"": "title: \"选择项目\""
   }
 }

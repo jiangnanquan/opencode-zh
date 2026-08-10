@@ -10,6 +10,8 @@
     "<text fg={theme.textMuted}>Waiting for authorization...</text>": "<text fg={theme.textMuted}>等待授权...</text>",
     "<text fg={theme.error}>Invalid code</text>": "<text fg={theme.error}>无效的授权码</text>",
     "c <span style={{ fg: theme.textMuted }}>copy</span>": "c <span style={{ fg: theme.textMuted }}>复制</span>",
-    "to get a key": "获取密钥"
+    "to get a key": "获取密钥",
+    "title=\"API key\"": "title=\"API 密钥\"",
+    "placeholder: \"Provider id\"": "placeholder: \"提供商标识\""
   }
 }

@@ -30,6 +30,18 @@
     "message: \"Failed to fork session\"": "message: \"分支会话失败\"",
     "Copied to clipboard": "已复制到剪贴板",
     "title: animationsEnabled() ? \"Disable animations\" : \"Enable animations\"": "title: animationsEnabled() ? \"禁用动画\" : \"启用动画\"",
-    "category: \"System\"": "category: \"系统\""
+    "category: \"System\"": "category: \"系统\"",
+    "title: \"Show command palette\"": "title: \"显示命令面板\"",
+    "title: \"New session\"": "title: \"新建会话\"",
+    "title: \"Copy worktree path\"": "title: \"复制工作区路径\"",
+    "title: \"Manage workspaces\"": "title: \"管理工作区\"",
+    "title: \"Toggle MCPs\"": "title: \"开关 MCP\"",
+    "title: \"Switch model variant\"": "title: \"切换模型变体\"",
+    "title: \"No variants available\"": "title: \"没有可用变体\"",
+    "title: \"Connect provider\"": "title: \"连接提供商\"",
+    "title: \"Switch org\"": "title: \"切换组织\"",
+    "title: \"View debug info\"": "title: \"查看调试信息\"",
+    "title: \"Help\"": "title: \"帮助\"",
+    "title: \"Update Failed\"": "title: \"更新失败\""
   }
 }

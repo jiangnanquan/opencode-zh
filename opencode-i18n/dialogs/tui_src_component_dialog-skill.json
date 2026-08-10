@@ -3,6 +3,8 @@
   "description": "自动迁移: packages/tui/src/component/dialog-skill.tsx",
   "replacements": {
     "placeholder: \"Search skills...\"": "placeholder: \"搜索技能...\"",
-    "category: \"Skills\"": "category: \"技能\""
+    "category: \"Skills\"": "category: \"技能\"",
+    "title=\"Skills\"": "title=\"技能\"",
+    "placeholder=\"Search skills...\"": "placeholder=\"搜索技能...\""
   }
 }

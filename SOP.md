@@ -35,6 +35,7 @@
 | AI prompt 模板（发给模型的指令文本） | `add "(Recommended)" at the end of the label` | 改变 AI 行为/解析 |
 | 代码标识符、变量名、函数名、命令名 | `describe: "list sessions"` 的 key 不变但 value 可改 | — |
 | 错误日志的英文模板（可改但无意义，建议保留） | `failed to list agents from ${x}` | 中英混杂，无价值 |
+| **纯小写简单单词规则**（工具按单词边界匹配） | `"native"→"原生"` 会命中 `@typescript/native-preview` 的 native；`"delete"→"删除"` 会命中 SQL 类型 `"delete"` | 配置迁移的宽容匹配会生成这类规则，必须删除——简单单词规则只允许带代码上下文（如 `title="Select agent"`） |
 
 **判断方法**：如果一段文本出现在「引用、字符串字面量赋值给类型/枚举/常量/命令」的位置，
 且不是用户可见的界面文案（title/label/placeholder/button 文本/菜单项/提示信息），则不改。

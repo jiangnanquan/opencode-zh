@@ -1,0 +1,8 @@
+{
+  "file": "packages/tui/src/ui/dialog-prompt.tsx",
+  "description": "自动迁移: packages/tui/src/ui/dialog-prompt.tsx",
+  "replacements": {
+    "placeholder={props.placeholder ?? \"Enter text\"}": "placeholder={props.placeholder ?? \"输入文本\"}",
+    "title: \"Submit dialog prompt\"": "title: \"提交对话框提示\""
+  }
+}

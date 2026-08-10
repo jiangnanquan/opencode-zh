@@ -1,7 +1,0 @@
-{
-  "file": "packages/effect-drizzle-sqlite/src/sqlite-core/effect/session.ts",
-  "description": "自动迁移: packages/effect-drizzle-sqlite/src/sqlite-core/effect/session.ts",
-  "replacements": {
-    "delete": "删除"
-  }
-}

@@ -1,0 +1,14 @@
+{
+  "file": "packages/tui/src/feature-plugins/system/diff-viewer.tsx",
+  "description": "人工补充: 遗漏副本",
+  "replacements": {
+    "title=\"Switch source\"": "title=\"切换来源\"",
+    "title: \"Close diff viewer\"": "title: \"关闭差异查看器\"",
+    "title: \"Move diff viewer down\"": "title: \"下移差异查看器\"",
+    "title: \"Move diff viewer up\"": "title: \"上移差异查看器\"",
+    "title: \"Page diff viewer down\"": "title: \"向下翻页\"",
+    "title: \"Page diff viewer up\"": "title: \"向上翻页\"",
+    "title: \"Toggle diff viewer item\"": "title: \"切换差异查看器项目\"",
+    "title: \"Expand diff viewer item\"": "title: \"展开差异查看器项目\""
+  }
+}

@@ -12,6 +12,11 @@
     "title: \"Stash pop\"": "title: \"弹出存储\"",
     "title: \"Stash list\"": "title: \"存储列表\"",
     "title: \"Skills\"": "title: \"技能\"",
-    "category: \"Prompt\"": "category: \"提示\""
+    "category: \"Prompt\"": "category: \"提示\"",
+    "Ask anything...": "随便问点什么...",
+    "<span style={{ fg: theme.textMuted }}>agents</span>": "<span style={{ fg: theme.textMuted }}>智能体</span>",
+    "<span style={{ fg: theme.textMuted }}>commands</span>": "<span style={{ fg: theme.textMuted }}>命令</span>",
+    "<span style={{ fg: theme.textMuted }}>exit shell mode</span>": "<span style={{ fg: theme.textMuted }}>退出 shell 模式</span>",
+    "title: \"Move session\"": "title: \"移动会话\""
   }
 }
