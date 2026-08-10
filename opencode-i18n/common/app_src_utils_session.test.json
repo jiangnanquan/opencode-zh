@@ -1,7 +1,0 @@
-{
-  "file": "packages/app/src/utils/session.test.ts",
-  "description": "自动迁移: packages/app/src/utils/session.test.ts",
-  "replacements": {
-    "\"New session\"": "\"新建会话\""
-  }
-}

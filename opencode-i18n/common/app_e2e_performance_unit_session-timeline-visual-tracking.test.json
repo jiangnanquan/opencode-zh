@@ -1,7 +1,0 @@
-{
-  "file": "packages/app/e2e/performance/unit/session-timeline-visual-tracking.test.ts",
-  "description": "自动迁移: packages/app/e2e/performance/unit/session-timeline-visual-tracking.test.ts",
-  "replacements": {
-    "category: \"Recent\"": "category: \"最近\""
-  }
-}

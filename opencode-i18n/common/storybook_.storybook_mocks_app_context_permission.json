@@ -1,7 +1,0 @@
-{
-  "file": "packages/storybook/.storybook/mocks/app/context/permission.ts",
-  "description": "自动迁移: packages/storybook/.storybook/mocks/app/context/permission.ts",
-  "replacements": {
-    "Permission": "权限"
-  }
-}

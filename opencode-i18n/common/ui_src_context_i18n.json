@@ -1,7 +1,0 @@
-{
-  "file": "packages/ui/src/context/i18n.tsx",
-  "description": "自动迁移: packages/ui/src/context/i18n.tsx",
-  "replacements": {
-    "Parent": "父会话"
-  }
-}

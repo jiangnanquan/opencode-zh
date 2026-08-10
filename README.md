@@ -1,53 +1,68 @@
-# opencode-zh — OpenCode CLI 汉化项目
+# opencode-zh — OpenCode CLI 简体中文汉化
 
-对 [opencode](https://github.com/anomalyco/opencode)（terminal AI coding agent）的 CLI/TUI
-界面进行简体中文汉化。**版本号严格跟随官方**（汉化版 `opencode --version` 显示官方版本号）。
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-macOS%20(Apple%20Silicon)-lightgrey.svg)](#)
+[![OpenCode](https://img.shields.io/badge/OpenCode-1.18.16-green.svg)](#)
+
+> 一个 **Claude Code skill**：把 opencode（terminal AI coding agent）的 CLI/TUI 界面
+> 汉化为简体中文。**版本号严格跟随官方**，只做 UI 汉化，不碰模型配置与 AI 行为。
 
 ## 这是什么
 
-一个「汉化包 + SOP」项目。维护者只需维护本目录：
+- **汉化包**：44 个 JSON 规则集（覆盖对话框、命令面板、侧边栏、快捷键提示等全部主要界面）
+- **一键汉化**：`bash scripts/localize.sh` 自动完成 下载源码 → 迁移配置 → 应用 → 甄别 → 构建 → 部署
+- **AI 友好**：整个仓库是一个 skill（`SKILL.md` 为唯一入口），任何 AI agent 按它即可独立完成汉化
+- **版本跟随**：汉化版 `opencode --version` 显示官方版本号（当前 v1.18.16），不发明自己的版本号
 
-```
-opencode-zh/
-├── SOP.md                 ★ 完整操作规程（交付给任何 AI agent 执行的提示词）
-├── AGENTS.md              给 AI agent 的速览（进入目录自动读取）
-├── i18n/opencode-i18n/    ★ 汉化配置包（JSON 规则集，59 个文件）
-├── scripts/
-│   ├── migrate_i18n.py            配置增量迁移（旧规则 → 新版本源码重定位）
-│   ├── check-misreplacements.sh   误伤甄别（对照干净源码）
-│   └── deploy.sh                  部署到 ~/.opencode/bin
-├── tools/                 opencode-cli（汉化应用/构建工具，见下）
-└── docs/                  踩坑记录
+## 安装为 skill
+
+```bash
+# 方式一：克隆后作为 skill 使用（需 Claude Code）
+git clone https://github.com/jiangnanquan/opencode-zh.git ~/.claude/skills/opencode-zh
+# 之后对话中可直接用 /opencode-zh 触发
+
+# 方式二：本机直接使用（不依赖 Claude Code）
+git clone https://github.com/jiangnanquan/opencode-zh.git
+cd opencode-zh
+bash scripts/build-tool.sh   # 编译汉化工具（需 go）
+bash scripts/localize.sh     # 一键汉化并部署
 ```
 
 ## 快速使用
 
 ```bash
-# 完整流程见 SOP.md。5 步摘要：
-export OPENCODE_PROJECT_DIR=/Users/jnq/Dev/Private/opencode-zh
-export OPENCODE_SOURCE_DIR=~/opencode-zh-build/opencode-dev
-export OPENCODE_VERSION=1.18.16        # 随官方版本更新
+# 更新汉化版（官方发布新版后）
+bash scripts/localize.sh
 
-tools/opencode-cli apply                                          # 1 应用汉化
-bash scripts/check-misreplacements.sh                             # 2 误伤甄别
-tools/opencode-cli build --platform darwin-arm64 --deploy=false   # 3 构建
-bash scripts/deploy.sh                                            # 4 部署
-~/.opencode/bin/opencode --version                                # 5 验收
+# 部署后运行
+opencode
 ```
 
-## 当前状态
+汉化版部署在 `~/.opencode/bin/opencode`（自动重新签名，兼容 macOS 26）。
 
-- 最新汉化版：**v1.18.16**（2026-08-10 构建，跟随官方 dev 分支）
-- 已部署：`~/.opencode/bin/opencode`（`opencode --version` → `1.18.16`）
-- 汉化覆盖：308 条规则、48 个文件，273 处替换生效；误伤甄别通过（非 UI 代码 0 中文残留）
+## 项目结构
 
-## 背景（历史）
+```
+opencode-zh/                  ← skill 根目录
+├── SKILL.md                  ★ 唯一入口（AI agent 读它即可完成全部工作）
+├── opencode-i18n/            ★ 汉化包（44 个 JSON 规则集）
+├── scripts/
+│   ├── localize.sh           ★ 一键全流程
+│   ├── migrate_i18n.py       配置增量迁移（官方更新后重定位规则）
+│   ├── check-misreplacements.sh  误伤甄别（红线扫描）
+│   ├── deploy.sh             部署 + 代码签名
+│   └── build-tool.sh         编译汉化工具
+├── docs/                     内部文档（环境备忘、踩坑记录）
+└── SOP.md                    参考手册（格式规范、排查指南）
+```
 
-- 社区汉化项目 [1186258278/OpenCodeChineseTranslation](https://github.com/1186258278/OpenCodeChineseTranslation)
-  因 nightly 流水线 bug 自 2026-03-11 起停更，且配置针对旧版 TUI（`src/cli/cmd/tui/`），
-  对 v1.18.x（TUI 重构到 `packages/tui/src/`）全部失效。
-- 本项目的 i18n 配置即由旧项目配置**自动迁移**而来（405 条规则 → 308 条在新版源码定位，
-  273/301 处替换生效），并修正了迁移引入的误伤。
-- 部署位置 `~/.opencode/bin` 已在用户 `~/.zshrc` 的 PATH 中。
+## 限制
 
-> 本机环境细节（网络、工具链、构建目录）见 `docs/environment.md`。
+- 仅构建 macOS Apple Silicon（darwin-arm64）——本仓库定位为个人/小团队使用
+- 汉化覆盖 CLI/TUI 主要界面；命令描述等次要文本可能未全覆盖（欢迎 PR 补充）
+- 模型名与专有概念（如 Warp）按约定不汉化
+
+## 关联项目
+
+- [opencode](https://github.com/anomalyco/opencode) — 被汉化的官方项目
+- [OpenCodeChineseTranslation](https://github.com/1186258278/OpenCodeChineseTranslation) — 早期社区汉化项目（2026-03 起停更，配置已迁移到本项目）

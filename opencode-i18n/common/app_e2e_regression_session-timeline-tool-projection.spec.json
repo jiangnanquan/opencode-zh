@@ -1,7 +1,0 @@
-{
-  "file": "packages/app/e2e/regression/session-timeline-tool-projection.spec.ts",
-  "description": "自动迁移: packages/app/e2e/regression/session-timeline-tool-projection.spec.ts",
-  "replacements": {
-    "Exa Web Search": "网络搜索"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "file": "packages/ui/vite.config.ts",
-  "description": "自动迁移: packages/ui/vite.config.ts",
-  "replacements": {
-    "Set {highlight}\"formatter\": false{/highlight} in config to disable all auto-formatting": "在配置中设置 {highlight}\"formatter\": false{/highlight} 禁用所有自动格式化"
-  }
-}

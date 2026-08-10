@@ -5,31 +5,23 @@ description: OpenCode CLI 界面汉化（简体中文）。下载官方最新源
 
 # OpenCode CLI 汉化（简体中文）
 
-将 opencode（terminal AI coding agent，仓库 `anomalyco/opencode`）的 **CLI/TUI 界面文字**
-汉化为简体中文并构建部署。**只做这一件事**：UI 汉化。其余一切（模型配置、工作流、
-agent 行为等）不负责，交给使用者自己的 agent。
+把 opencode（terminal AI coding agent，官方仓库 `anomalyco/opencode`）的 **CLI/TUI 界面文字**
+汉化为简体中文并构建部署。**只做这一件事**：UI 汉化。其余（模型配置、工作流、agent 行为）不负责。
 
-## 重要原则
+## 快速开始（一条命令）
 
-1. **版本跟随官方**：汉化版 `opencode --version` 显示官方版本号（如 1.18.16）。
-   构建时必须传 `OPENCODE_VERSION`，否则构建脚本报 "不是 git 仓库"。
-2. **只改 UI 展示文本**：JSX 文本属性（title/placeholder/label）、对话框文字、命令面板、
-   菜单项、按钮、toast、帮助文本。
-3. **红线（违反即坏）**：TS 类型字符串字面量（`"Unknown"`）、SQL 操作类型（`"delete"`）、
-   npm 包名/依赖声明（`@typescript/native-preview`）、AI prompt 模板、错误日志模板。
-   误伤后 `bun install` 或运行会直接炸。
+```bash
+bash scripts/localize.sh
+```
 
-## 文件位置（本 skill 目录内）
+脚本自动执行完整流程：下载官方最新源码 → 迁移汉化配置 → 应用 → 误伤甄别 → 构建 → 部署到 `~/.opencode/bin`。适用于日常「官方更新后重新汉化」。
 
-- `i18n/opencode-i18n/` — 汉化配置包（JSON 规则集，含全部已翻译条目）
-- `scripts/migrate_i18n.py` — 官方更新后增量迁移配置（旧规则在新源码重定位）
-- `scripts/check-misreplacements.sh` — 误伤甄别（对照干净源码 + 红线扫描）
-- `scripts/deploy.sh` — 部署到 `~/.opencode/bin/opencode`
-- `SOP.md` — 完整操作规程（细节参考，执行前通读）
-- `tools/opencode-cli` — 汉化应用/构建工具（首次需按 `scripts/build-tool.sh` 编译，或从
-  汉化项目 `1186258278/OpenCodeChineseTranslation` 的 release 下载 darwin-arm64 版）
+## 手动流程（分步执行，便于调试）
 
-## 工作流
+### 0. 准备
+
+- 汉化工具 `tools/opencode-cli`（缺失时先 `bash scripts/build-tool.sh`）
+- 网络：`github.com` 直连超时，本机环境细节见 `docs/environment.md`
 
 ### 1. 获取官方最新源码
 
@@ -44,44 +36,66 @@ echo "官方版本: $VERSION"
 ### 2. 更新汉化配置（官方更新后必做）
 
 ```bash
-python3 <skill>/scripts/migrate_i18n.py ~/opencode-zh-build/opencode-dev
+python3 scripts/migrate_i18n.py ~/opencode-zh-build/opencode-dev
 ```
 
-命中率 ≥70% 可接受；未命中规则人工决定补写。迁移会写回 `<skill>/i18n/opencode-i18n/`。
+- 命中率 ≥70% 可接受；未命中规则打印后人工决定补写
+- 迁移后配置写回 `opencode-i18n/`（注意：迁移可能生成「简单单词」毒规则，见步骤 4）
 
 ### 3. 应用汉化
 
 ```bash
-export OPENCODE_PROJECT_DIR=<skill目录> OPENCODE_SOURCE_DIR=~/opencode-zh-build/opencode-dev
-<skill>/tools/opencode-cli apply
+export OPENCODE_PROJECT_DIR=<本目录> OPENCODE_SOURCE_DIR=~/opencode-zh-build/opencode-dev
+tools/opencode-cli apply
 ```
 
-**必须看命中统计**：预期 `文件: N 成功`、`替换: X/Y 成功`。全 0 说明配置路径失效。
+**必须检查命中统计**：预期 `文件: N 成功`、`替换: X/Y 成功`。全 0 说明配置路径失效。
 
 ### 4. 误伤甄别（必做）
 
 ```bash
-bash <skill>/scripts/check-misreplacements.sh
+bash scripts/check-misreplacements.sh
 ```
 
-逐条确认列出的非 `tui/src` 改动；红线命中用 sed 恢复原样。
+对列出的非 `tui/src` 改动逐条确认。**红线命中立即恢复**（见下方红线清单）。
 
 ### 5. 构建 + 部署 + 验收
 
 ```bash
 export OPENCODE_VERSION=$VERSION
-<skill>/tools/opencode-cli build --platform darwin-arm64 --deploy=false
-bash <skill>/scripts/deploy.sh
-~/.opencode/bin/opencode --version   # 应显示官方版本号
+tools/opencode-cli build --platform darwin-arm64 --deploy=false
+bash scripts/deploy.sh          # 含 codesign 重签（macOS 26 必须）
+opencode --version              # 验收：显示官方版本号
 ```
 
-## 环境备忘
+## 红线清单（违反即坏，违反即返工）
 
-- 本机 `github.com` 直连超时；`codeload.github.com` / `raw.githubusercontent.com` /
-  `api.github.com` / `release-assets.githubusercontent.com` 可直连。
-- 系统代理 `127.0.0.1:7892`（HTTP/HTTPS/SOCKS）：
-  `export https_proxy=http://127.0.0.1:7892 http_proxy=http://127.0.0.1:7892`
-  （go 依赖 proxy.golang.org、bun install 失败时必用）。
-- 跨平台交叉构建不可行（bun 1.3.8 无 windows-aarch64 target），只构建 darwin-arm64。
-- 旧版配置失效原因：v1.18.x 把 TUI 从 `packages/opencode/src/cli/cmd/tui/`
-  重构到独立包 `packages/tui/src/`，界面文案大多保留，迁移可找回。
+只改 UI 展示文本（JSX 文本属性、对话框、菜单、按钮、toast、帮助文本）。**禁止**：
+
+| 红线 | 案例 | 后果 |
+|---|---|---|
+| TS 类型字符串字面量 | `"Unknown"` → `"未知"` | 类型判断失效 |
+| SQL/数据库操作类型 | `"delete"` → `"删除"` | 数据库操作无法识别 |
+| npm 包名/依赖声明 | `@typescript/native-preview` | bun install 直接失败 |
+| AI prompt 模板 | `add "(Recommended)"...` | 改变 AI 行为 |
+| **纯小写简单单词规则**（工具按单词边界匹配） | `"native"→"原生"` 命中包名里的 native | 必须删除，只允许带代码上下文的规则 |
+
+## 汉化包（`opencode-i18n/`）
+
+- 44 个 JSON 配置，按源码位置分类：`dialogs/`（对话框）、`components/`（组件/侧边栏）、`routes/`（路由页）、`common/`（其余）
+- 格式：`{"file": "<仓库相对路径>", "replacements": {"原文": "译文"}}`，`file` 必须以 `packages/` 开头
+- 分类目录可任意调整，apply 会递归扫描
+- 更新官方源码后**不要手工改配置**，用 `scripts/migrate_i18n.py` 重定位
+
+## 详细参考
+
+- `SOP.md` — 完整操作规程、格式规范、历史踩坑记录（执行前通读）
+- `docs/environment.md` — 本机网络/工具链备忘
+- `docs/pitfalls.md` — 红线案例与故障排查
+
+## 项目维护原则
+
+1. 只维护：汉化包（`opencode-i18n/`）、脚本（`scripts/`）、文档
+2. 版本号严格跟随官方，不发明自己的版本号
+3. 模型名、专有概念（Warp 等）不汉化
+4. 给其他 AI agent 交付时：让它读本文件（SKILL.md）即可独立完成整个流程

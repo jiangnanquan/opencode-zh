@@ -1,7 +1,0 @@
-{
-  "file": "packages/storybook/.storybook/mocks/app/context/server-sdk.ts",
-  "description": "自动迁移: packages/storybook/.storybook/mocks/app/context/server-sdk.ts",
-  "replacements": {
-    "label: \"API key\"": "label: \"API密钥\""
-  }
-}

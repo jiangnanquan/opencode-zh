@@ -1,9 +1,8 @@
-# OpenCode CLI 汉化 SOP（可交付给任意 AI Agent 执行）
+# OpenCode CLI 汉化 SOP（参考手册）
 
-> 本文档是「opencode CLI 界面汉化」的完整操作规程。任何 AI agent（或人）都可以按照本文档，
-> 对任意版本的 opencode 官方源码生成/更新汉化包、构建并部署汉化版。
->
-> 维护者只需维护：本 SOP + `i18n/opencode-i18n/` 配置包 + `scripts/` 工具。
+> 本文档是 [SKILL.md](SKILL.md) 的**详细参考**：格式规范、红线案例、历史踩坑与故障排查。
+> 执行流程以 SKILL.md 为准；本文档用于理解细节、排查问题。
+> 维护者只需维护：`opencode-i18n/` 配置包 + `scripts/` 工具 + 本文档。
 
 ---
 
@@ -13,7 +12,7 @@
 翻译为简体中文，其余一切保持不变。
 
 **产出**：
-1. 汉化配置包（JSON 规则集，位于 `i18n/opencode-i18n/`）
+1. 汉化配置包（JSON 规则集，位于 `opencode-i18n/`）
 2. 汉化后的 opencode 二进制（darwin-arm64）
 3. 部署到 `~/.opencode/bin/opencode`（用户 `.zshrc` 已配置该目录）
 
@@ -117,7 +116,7 @@ grep '"version"' opencode-dev/packages/cli/package.json
 1. 扫描 UI 字符串：在 `packages/tui/src/` 与 `packages/opencode/src/cli/` 中，
    按第 1 节「只改这些」的标准收集界面文案（建议逐文件：`component/`、`routes/session/`、
    `ui/`、`app.tsx`、`feature-plugins/`）。
-2. 为每个目标文件写配置 JSON（格式见第 5 节），放入 `i18n/opencode-i18n/<分类>/`。
+2. 为每个目标文件写配置 JSON（格式见第 5 节），放入 `opencode-i18n/<分类>/`。
 3. 分类目录：`dialogs/`（对话框）、`components/`（组件/侧边栏）、`routes/`（路由页）、`common/`（其余）。
 
 **B. 增量迁移（已有配置时的快速更新）**：
