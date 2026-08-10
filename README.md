@@ -7,6 +7,8 @@
 > 一个 **Claude Code skill**：把 opencode（terminal AI coding agent）的 CLI/TUI 界面
 > 汉化为简体中文。**版本号严格跟随官方**，只做 UI 汉化，不碰模型配置与 AI 行为。
 
+![汉化效果](assets/opencode-zh-screenshot.png)
+
 ## 这是什么
 
 - **汉化包**：44 个 JSON 规则集（覆盖对话框、命令面板、侧边栏、快捷键提示等全部主要界面）
