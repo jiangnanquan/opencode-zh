@@ -16,5 +16,10 @@ fi
 mkdir -p "$HOME/.opencode/bin"
 cp "$ARTIFACT" "$HOME/.opencode/bin/opencode"
 chmod +x "$HOME/.opencode/bin/opencode"
+
+# 关键：Bun 编译产物是 linker-signed 的 adhoc 签名，macOS 26+ 的 taskgated 会拒绝
+# （SIGKILL: Code Signature Invalid）。必须用标准 adhoc 重新签名。
+codesign --force -s - "$HOME/.opencode/bin/opencode" 2>/dev/null && echo "✓ 已重新签名 (adhoc)"
+
 echo "✓ 已部署: $HOME/.opencode/bin/opencode"
 "$HOME/.opencode/bin/opencode" --version

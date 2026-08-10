@@ -235,6 +235,14 @@ chmod +x ~/.opencode/bin/opencode
 4. **opencc / 翻译一致性**：译文沿用旧汉化项目的中文习惯（如「智能体」而非「代理」、
    「会话」而非「聊天」），保持新旧版本体验一致。
 5. **构建产物体积**：汉化后单二进制约 100-200MB，属正常（Bun 编译产物）。
+6. **代码签名（必做！）**：Bun 编译产物是 `linker-signed` 的 adhoc 签名，macOS 26+
+   的 taskgated 会拒绝启动（`zsh: killed` / `SIGKILL (Code Signature Invalid)` /
+   崩溃报告 `Taskgated Invalid Signature`）。**部署前必须重签**：
+   ```bash
+   codesign --force -s - <二进制路径>
+   ```
+   `deploy.sh` 已内置该步骤。验证：`opencode --version` 正常输出即 OK。
+   （注意：构建脚本内的 smoke test 可能不受影响，不能作为签名有效的依据。）
 
 ---
 
