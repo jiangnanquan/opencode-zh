@@ -21,7 +21,7 @@ bash scripts/localize.sh
 ### 0. 准备
 
 - 汉化工具 `tools/opencode-cli`（缺失时先 `bash scripts/build-tool.sh`）
-- 网络：`github.com` 直连超时，本机环境细节见 `docs/environment.md`
+- 网络：`github.com` 直连超时，本机环境细节见 SOP 第 7 节
 
 ### 1. 获取官方最新源码
 
@@ -89,9 +89,8 @@ opencode --version              # 验收：显示官方版本号
 
 ## 详细参考
 
-- `SOP.md` — 完整操作规程、格式规范、历史踩坑记录（执行前通读）
-- `docs/environment.md` — 本机网络/工具链备忘
-- `docs/pitfalls.md` — 红线案例与故障排查
+- `SOP.md` — 完整操作规程、格式规范、本机环境备忘、历史踩坑记录（执行前通读）
+- `PITFALLS.md` — 红线案例与故障排查
 
 ## 项目维护原则
 

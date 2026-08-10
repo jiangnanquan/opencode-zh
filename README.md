@@ -52,8 +52,8 @@ opencode-zh/                  ← skill 根目录
 │   ├── check-misreplacements.sh  误伤甄别（红线扫描）
 │   ├── deploy.sh             部署 + 代码签名
 │   └── build-tool.sh         编译汉化工具
-├── docs/                     内部文档（环境备忘、踩坑记录）
-└── SOP.md                    参考手册（格式规范、排查指南）
+├── SOP.md                    参考手册（格式规范、环境备忘、排查指南）
+└── PITFALLS.md               踩坑记录与故障排查
 ```
 
 ## 限制
