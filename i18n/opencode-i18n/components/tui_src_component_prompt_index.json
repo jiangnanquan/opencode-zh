@@ -1,0 +1,17 @@
+{
+  "file": "packages/tui/src/component/prompt/index.tsx",
+  "description": "自动迁移: packages/tui/src/component/prompt/index.tsx",
+  "replacements": {
+    "message: \"Connect a provider to send prompts\"": "message: \"连接提供商以发送提示\"",
+    "title: \"Clear prompt\"": "title: \"清除提示\"",
+    "title: \"Submit prompt\"": "title: \"提交提示\"",
+    "title: \"Paste\"": "title: \"粘贴\"",
+    "title: \"Interrupt session\"": "title: \"中断会话\"",
+    "title: \"Open editor\"": "title: \"打开编辑器\"",
+    "title: \"Stash prompt\"": "title: \"存储提示\"",
+    "title: \"Stash pop\"": "title: \"弹出存储\"",
+    "title: \"Stash list\"": "title: \"存储列表\"",
+    "title: \"Skills\"": "title: \"技能\"",
+    "category: \"Prompt\"": "category: \"提示\""
+  }
+}

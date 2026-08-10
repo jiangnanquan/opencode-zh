@@ -1,0 +1,7 @@
+{
+  "file": "packages/core/src/location-mutation.ts",
+  "description": "自动迁移: packages/core/src/location-mutation.ts",
+  "replacements": {
+    "\"Unknown\"": "\"未知\""
+  }
+}

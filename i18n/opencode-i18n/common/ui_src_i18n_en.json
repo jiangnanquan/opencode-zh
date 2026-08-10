@@ -1,0 +1,9 @@
+{
+  "file": "packages/ui/src/i18n/en.ts",
+  "description": "自动迁移: packages/ui/src/i18n/en.ts",
+  "replacements": {
+    "No matching items": "未找到匹配项",
+    "(not answered)": "(未回答)",
+    "Type your own answer": "输入你自己的答案"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "file": "packages/tui/src/routes/session/permission.tsx",
+  "description": "自动迁移: packages/tui/src/routes/session/permission.tsx",
+  "replacements": {
+    "title=\"Always allow\"": "title=\"始终允许\"",
+    "title=\"Permission required\"": "title=\"需要权限\"",
+    "options={{ once: \"Allow once\", always: \"Allow always\", reject: \"Reject\" }}": "options={{ once: \"允许一次\", always: \"始终允许\", reject: \"拒绝\" }}",
+    "title=\"Continue after repeated failures\"": "title=\"连续失败后继续\"",
+    "\"This will allow \" + props.request.permission + \" until OpenCode is restarted.\"": "\"这将允许 \" + props.request.permission + \" 直到OpenCode重启。\"",
+    "This will allow the following patterns until OpenCode is restarted": "这将允许以下模式，直到 OpenCode 重启",
+    "options={{ confirm: \"Confirm\", cancel: \"Cancel\" }}": "options={{ confirm: \"确认\", cancel: \"取消\" }}",
+    "<text fg={theme.text}>Reject permission</text>": "<text fg={theme.text}>拒绝权限</text>",
+    "<text fg={theme.textMuted}>Tell OpenCode what to do differently</text>": "<text fg={theme.textMuted}>告诉OpenCode如何处理</text>",
+    "Call tool": "调用工具",
+    "Access external directory ": "访问外部目录 "
+  }
+}

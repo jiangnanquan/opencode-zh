@@ -1,0 +1,8 @@
+{
+  "file": "packages/tui/src/component/command-palette.tsx",
+  "description": "自动迁移: packages/tui/src/component/command-palette.tsx",
+  "replacements": {
+    "category: \"Suggested\"": "category: \"建议\"",
+    "title=\"Commands\"": "title=\"命令\""
+  }
+}

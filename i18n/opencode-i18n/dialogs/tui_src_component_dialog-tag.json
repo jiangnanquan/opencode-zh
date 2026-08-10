@@ -1,0 +1,7 @@
+{
+  "file": "packages/tui/src/component/dialog-tag.tsx",
+  "description": "自动迁移: packages/tui/src/component/dialog-tag.tsx",
+  "replacements": {
+    "title=\"Autocomplete\"": "title=\"自动完成\""
+  }
+}

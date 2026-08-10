@@ -1,0 +1,7 @@
+{
+  "file": "packages/tui/src/routes/session/dialog-timeline.tsx",
+  "description": "自动迁移: packages/tui/src/routes/session/dialog-timeline.tsx",
+  "replacements": {
+    "title=\"Timeline\"": "title=\"时间线\""
+  }
+}

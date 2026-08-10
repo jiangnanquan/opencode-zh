@@ -1,0 +1,10 @@
+{
+  "file": "packages/tui/src/routes/session/question.tsx",
+  "description": "自动迁移: packages/tui/src/routes/session/question.tsx",
+  "replacements": {
+    "placeholder=\"Type your own answer\"": "placeholder=\"输入你自己的答案\"",
+    ">Confirm</": ">确认</",
+    ">Review</": ">审查</",
+    " (select all that apply)": " (全选所有适用的)"
+  }
+}

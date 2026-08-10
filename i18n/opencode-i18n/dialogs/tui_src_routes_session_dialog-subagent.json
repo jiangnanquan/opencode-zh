@@ -1,0 +1,9 @@
+{
+  "file": "packages/tui/src/routes/session/dialog-subagent.tsx",
+  "description": "自动迁移: packages/tui/src/routes/session/dialog-subagent.tsx",
+  "replacements": {
+    "title=\"Subagent Actions\"": "title=\"子智能体操作\"",
+    "title: \"Open\"": "title: \"打开\"",
+    "the subagent's session": "子智能体会话"
+  }
+}

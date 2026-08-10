@@ -1,0 +1,7 @@
+{
+  "file": "packages/tui/src/component/dialog-theme-list.tsx",
+  "description": "自动迁移: packages/tui/src/component/dialog-theme-list.tsx",
+  "replacements": {
+    "title=\"Themes\"": "title=\"主题\""
+  }
+}

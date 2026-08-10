@@ -1,0 +1,7 @@
+{
+  "file": "packages/tui/src/component/prompt/autocomplete.tsx",
+  "description": "自动迁移: packages/tui/src/component/prompt/autocomplete.tsx",
+  "replacements": {
+    "<text fg={theme.textMuted}>No matching items</text>": "<text fg={theme.textMuted}>未找到匹配项</text>"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "file": "packages/tui/src/component/dialog-stash.tsx",
+  "description": "自动迁移: packages/tui/src/component/dialog-stash.tsx",
+  "replacements": {
+    "title=\"Stash\"": "title=\"存储\"",
+    "`~${lineCount} lines`": "`约${lineCount}行`",
+    "just now": "刚刚",
+    "`${minutes}m ago`": "`${minutes}分钟前`",
+    "`${hours}h ago`": "`${hours}小时前`",
+    "`${days}d ago`": "`${days}天前`",
+    "title: \"delete\"": "title: \"删除\""
+  }
+}

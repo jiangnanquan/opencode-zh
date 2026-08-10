@@ -1,0 +1,10 @@
+{
+  "file": "packages/tui/src/ui/dialog-select.tsx",
+  "description": "自动迁移: packages/tui/src/ui/dialog-select.tsx",
+  "replacements": {
+    "<text fg={theme.textMuted}>No results found</text>": "<text fg={theme.textMuted}>未找到结果</text>",
+    "placeholder={props.placeholder ?? \"Search\"}": "placeholder={props.placeholder ?? \"搜索\"}",
+    "title: \"Page down\"": "title: \"向下翻页\"",
+    "title: \"Page up\"": "title: \"向上翻页\""
+  }
+}

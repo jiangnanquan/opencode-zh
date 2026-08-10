@@ -1,0 +1,15 @@
+{
+  "file": "packages/tui/src/component/dialog-provider.tsx",
+  "description": "自动迁移: packages/tui/src/component/dialog-provider.tsx",
+  "replacements": {
+    "title=\"Select auth method\"": "title=\"选择认证方式\"",
+    "<DialogSelect title=\"Connect a provider\"": "<DialogSelect title=\"连接提供商\"",
+    "placeholder=\"Authorization code\"": "placeholder=\"授权码\"",
+    "placeholder=\"API key\"": "placeholder=\"API密钥\"",
+    "(ChatGPT Plus/Pro or API key)": "(ChatGPT Plus/Pro 或 API密钥)",
+    "<text fg={theme.textMuted}>Waiting for authorization...</text>": "<text fg={theme.textMuted}>等待授权...</text>",
+    "<text fg={theme.error}>Invalid code</text>": "<text fg={theme.error}>无效的授权码</text>",
+    "c <span style={{ fg: theme.textMuted }}>copy</span>": "c <span style={{ fg: theme.textMuted }}>复制</span>",
+    "to get a key": "获取密钥"
+  }
+}

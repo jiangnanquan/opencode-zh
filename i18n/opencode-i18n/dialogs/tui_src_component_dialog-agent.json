@@ -1,0 +1,7 @@
+{
+  "file": "packages/tui/src/component/dialog-agent.tsx",
+  "description": "自动迁移: packages/tui/src/component/dialog-agent.tsx",
+  "replacements": {
+    "title=\"Select agent\"": "title=\"选择智能体\""
+  }
+}

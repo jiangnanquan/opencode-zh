@@ -1,0 +1,8 @@
+{
+  "file": "packages/tui/src/component/dialog-session-list.tsx",
+  "description": "自动迁移: packages/tui/src/component/dialog-session-list.tsx",
+  "replacements": {
+    "title=\"Sessions\"": "title=\"会话列表\"",
+    "title: \"rename\"": "title: \"重命名\""
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "file": "packages/storybook/.storybook/mocks/app/context/language.ts",
+  "description": "自动迁移: packages/storybook/.storybook/mocks/app/context/language.ts",
+  "replacements": {
+    "\"Connect provider\"": "\"连接提供商\"",
+    "? \"Popular\" : \"Other\"": "? \"热门\" : \"其他\"",
+    "\"Free\"": "\"免费\""
+  }
+}

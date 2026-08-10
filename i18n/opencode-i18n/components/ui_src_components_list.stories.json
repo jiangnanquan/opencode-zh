@@ -1,0 +1,7 @@
+{
+  "file": "packages/ui/src/components/list.stories.tsx",
+  "description": "自动迁移: packages/ui/src/components/list.stories.tsx",
+  "replacements": {
+    "} active": "} 个活跃"
+  }
+}

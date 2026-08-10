@@ -1,0 +1,13 @@
+{
+  "file": "packages/tui/src/component/dialog-status.tsx",
+  "description": "自动迁移: packages/tui/src/component/dialog-status.tsx",
+  "replacements": {
+    "No MCP Servers": "暂无 MCP 服务器",
+    "MCP Servers": "MCP 服务器",
+    "Disabled in configuration</Match>": "已在配置中禁用</Match>",
+    "Needs authentication": "需要认证",
+    "LSP Servers": "LSP 服务器",
+    "No Formatters": "暂无格式化器",
+    "Formatters": "格式化器"
+  }
+}

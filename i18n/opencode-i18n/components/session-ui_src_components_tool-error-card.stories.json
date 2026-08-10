@@ -1,0 +1,7 @@
+{
+  "file": "packages/session-ui/src/components/tool-error-card.stories.tsx",
+  "description": "自动迁移: packages/session-ui/src/components/tool-error-card.stories.tsx",
+  "replacements": {
+    "} error": "} 错误"
+  }
+}

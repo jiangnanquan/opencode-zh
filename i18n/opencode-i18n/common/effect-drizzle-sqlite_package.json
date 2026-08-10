@@ -1,0 +1,7 @@
+{
+  "file": "packages/effect-drizzle-sqlite/package.json",
+  "description": "自动迁移: packages/effect-drizzle-sqlite/package.json",
+  "replacements": {
+    "native": "原生"
+  }
+}
