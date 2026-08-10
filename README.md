@@ -35,6 +35,12 @@ bash scripts/deploy.sh                                            # 4 部署
 ~/.opencode/bin/opencode --version                                # 5 验收
 ```
 
+## 当前状态
+
+- 最新汉化版：**v1.18.16**（2026-08-10 构建，跟随官方 dev 分支）
+- 已部署：`~/.opencode/bin/opencode`（`opencode --version` → `1.18.16`）
+- 汉化覆盖：308 条规则、48 个文件，273 处替换生效；误伤甄别通过（非 UI 代码 0 中文残留）
+
 ## 背景（历史）
 
 - 社区汉化项目 [1186258278/OpenCodeChineseTranslation](https://github.com/1186258278/OpenCodeChineseTranslation)
