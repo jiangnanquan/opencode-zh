@@ -1,0 +1,8 @@
+{
+  "file": "packages/tui/src/feature-plugins/sidebar/footer.tsx",
+  "description": "侧边栏底部连接提示",
+  "replacements": {
+    "<text fg={theme().textMuted}>OpenCode includes free models so you can start immediately.</text>": "<text fg={theme().textMuted}>OpenCode 内置免费模型，您可以立即开始使用。</text>",
+    "<text fg={theme().text}>Connect provider</text>": "<text fg={theme().text}>连接服务商</text>"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "file": "packages/app/src/i18n/en.ts",
+  "description": "自动迁移: packages/app/src/i18n/en.ts",
+  "replacements": {
+    "\"Fix a TODO in the codebase\"": "\"修复代码库中的一个 TODO\"",
+    "\"What is the tech stack of this project?\"": "\"这个项目用了什么技术栈？\"",
+    "\"Fix broken tests\"": "\"修复失败的测试\""
+  }
+}

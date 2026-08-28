@@ -21,13 +21,14 @@ fi
 mkdir -p "$CLEAN_DIR"
 if [ -f "$TARBALL" ]; then
   tar xzf "$TARBALL" -C "$CLEAN_DIR"
+  CLEAN_PKG_DIR=$(find "$CLEAN_DIR" -mindepth 1 -maxdepth 1 -type d | head -1)/packages
 else
   echo "警告: 找不到 $TARBALL，无法对比，跳过。" >&2
   exit 0
 fi
 
 echo "=== 改动文件列表（干净 vs 汉化） ==="
-diff -rq "$CLEAN_DIR"/opencode-dev/packages "$SRC_DIR/packages" 2>/dev/null \
+diff -rq "$CLEAN_PKG_DIR" "$SRC_DIR/packages" 2>/dev/null \
   | grep -v node_modules
 
 echo ""
@@ -42,7 +43,7 @@ RISK_PATTERNS=(
   "temporary.ts"
 )
 for pat in "${RISK_PATTERNS[@]}"; do
-  diff -rq "$CLEAN_DIR"/opencode-dev/packages "$SRC_DIR/packages" 2>/dev/null \
+  diff -rq "$CLEAN_PKG_DIR" "$SRC_DIR/packages" 2>/dev/null \
     | grep -v node_modules | grep -q "$pat" && echo "  ⚠️  $pat  有改动，检查是否误伤"
 done
 

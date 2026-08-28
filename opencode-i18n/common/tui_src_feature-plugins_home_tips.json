@@ -1,7 +1,0 @@
-{
-  "file": "packages/tui/src/feature-plugins/home/tips.tsx",
-  "description": "自动迁移: packages/tui/src/feature-plugins/home/tips.tsx",
-  "replacements": {
-    "title: tipsHidden() ? \"Show tips\" : \"Hide tips\"": "title: tipsHidden() ? \"显示提示\" : \"隐藏提示\""
-  }
-}

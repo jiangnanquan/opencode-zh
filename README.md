@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS%20(Apple%20Silicon)-lightgrey.svg)](#)
-[![OpenCode](https://img.shields.io/badge/OpenCode-1.18.16-green.svg)](#)
+[![OpenCode](https://img.shields.io/badge/OpenCode-1.18.23-green.svg)](#)
 
 > 一个 **Claude Code skill**：把 opencode（terminal AI coding agent）的 CLI/TUI 界面
 > 汉化为简体中文。**版本号严格跟随官方**，只做 UI 汉化，不碰模型配置与 AI 行为。
@@ -11,10 +11,10 @@
 
 ## 这是什么
 
-- **汉化包**：44 个 JSON 规则集（覆盖对话框、命令面板、侧边栏、快捷键提示等全部主要界面）
+- **汉化包**：47 个 JSON 规则集（覆盖对话框、命令面板、侧边栏、快捷键提示等全部主要界面）
 - **一键汉化**：`bash scripts/localize.sh` 自动完成 下载源码 → 迁移配置 → 应用 → 甄别 → 构建 → 部署
 - **AI 友好**：整个仓库是一个 skill（`SKILL.md` 为唯一入口），任何 AI agent 按它即可独立完成汉化
-- **版本跟随**：汉化版 `opencode --version` 显示官方版本号（当前 v1.18.16），不发明自己的版本号
+- **版本跟随**：汉化版 `opencode --version` 显示官方版本号（当前 v1.18.23），不发明自己的版本号
 
 ## 安装为 skill
 
@@ -47,7 +47,7 @@ opencode
 ```
 opencode-zh/                  ← skill 根目录
 ├── SKILL.md                  ★ 唯一入口（AI agent 读它即可完成全部工作）
-├── opencode-i18n/            ★ 汉化包（44 个 JSON 规则集）
+├── opencode-i18n/            ★ 汉化包（47 个 JSON 规则集）
 ├── scripts/
 │   ├── localize.sh           ★ 一键全流程
 │   ├── migrate_i18n.py       配置增量迁移（官方更新后重定位规则）

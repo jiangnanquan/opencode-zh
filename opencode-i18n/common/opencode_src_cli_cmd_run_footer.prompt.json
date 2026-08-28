@@ -1,7 +1,0 @@
-{
-  "file": "packages/opencode/src/cli/cmd/run/footer.prompt.tsx",
-  "description": "自动迁移: packages/opencode/src/cli/cmd/run/footer.prompt.tsx",
-  "replacements": {
-    "open editor": "打开编辑器"
-  }
-}

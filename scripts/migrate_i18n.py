@@ -20,7 +20,12 @@ import re
 import sys
 
 DEFAULT_SRC = os.path.expanduser("~/opencode-zh-build/opencode-dev")
-DEFAULT_I18N = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "i18n", "opencode-i18n")
+_project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_default_candidates = [
+    os.path.join(_project_root, "opencode-i18n"),
+    os.path.join(_project_root, "i18n", "opencode-i18n"),
+]
+DEFAULT_I18N = next((p for p in _default_candidates if os.path.isdir(p)), _default_candidates[0])
 
 def load_source_files(src_dir):
     """收集新源码所有文本文件内容"""

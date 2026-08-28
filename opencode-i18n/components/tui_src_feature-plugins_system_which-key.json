@@ -1,0 +1,7 @@
+{
+  "file": "packages/tui/src/feature-plugins/system/which-key.tsx",
+  "description": "快捷键面板",
+  "replacements": {
+    "<text fg={look().muted}>No reachable bindings</text>": "<text fg={look().muted}>无可用按键绑定</text>"
+  }
+}

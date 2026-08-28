@@ -1,0 +1,7 @@
+{
+  "file": "packages/tui/src/component/error-component.tsx",
+  "description": "错误异常组件",
+  "replacements": {
+    "<text fg={colors.muted}>An unexpected error stopped the session.</text>": "<text fg={colors.muted}>发生非预期的错误，会话已终止。</text>"
+  }
+}

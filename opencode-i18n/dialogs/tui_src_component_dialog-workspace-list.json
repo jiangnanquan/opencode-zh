@@ -1,6 +1,6 @@
 {
   "file": "packages/tui/src/component/dialog-workspace-list.tsx",
-  "description": "人工补充: 遗漏 UI 文本",
+  "description": "自动迁移: packages/tui/src/component/dialog-workspace-list.tsx",
   "replacements": {
     "title=\"Workspaces\"": "title=\"工作区\""
   }

@@ -1,11 +1,10 @@
 {
   "file": "packages/tui/src/feature-plugins/sidebar/mcp.tsx",
-  "description": "自动迁移: packages/tui/src/feature-plugins/sidebar/mcp.tsx",
+  "description": "侧边栏 MCP 状态",
   "replacements": {
-    "Connected</Match>": "已连接</Match>",
     ">Connected</Match>": ">已连接</Match>",
     ">Disabled</Match>": ">已禁用</Match>",
     ">Needs auth</Match>": ">需要认证</Match>",
-    "Needs client ID": "需要客户端 ID"
+    ">Needs client ID</Match>": ">需要客户端 ID</Match>"
   }
 }

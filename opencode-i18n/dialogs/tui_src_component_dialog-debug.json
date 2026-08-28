@@ -1,0 +1,7 @@
+{
+  "file": "packages/tui/src/component/dialog-debug.tsx",
+  "description": "调试信息对话框",
+  "replacements": {
+    "<text fg={theme.textMuted}>Share this when reporting an issue.</text>": "<text fg={theme.textMuted}>反馈问题时请附带此信息。</text>"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "file": "packages/tui/src/feature-plugins/system/diff-viewer-file-tree.tsx",
+  "description": "差异文件树",
+  "replacements": {
+    "<text fg={props.theme.text}>No files</text>": "<text fg={props.theme.text}>无文件</text>"
+  }
+}

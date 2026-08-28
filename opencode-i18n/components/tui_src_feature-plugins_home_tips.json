@@ -1,0 +1,7 @@
+{
+  "file": "packages/tui/src/feature-plugins/home/tips.tsx",
+  "description": "主页小贴士切换",
+  "replacements": {
+    "title: props.hidden ? \"Show tips\" : \"Hide tips\"": "title: props.hidden ? \"显示小贴士\" : \"隐藏小贴士\""
+  }
+}

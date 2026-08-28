@@ -1,14 +1,21 @@
 {
   "file": "packages/tui/src/feature-plugins/system/diff-viewer.tsx",
-  "description": "人工补充: 遗漏副本",
+  "description": "差异查看器",
   "replacements": {
-    "title=\"Switch source\"": "title=\"切换来源\"",
+    "title: \"Open diff viewer\"": "title: \"打开差异查看器\"",
     "title: \"Close diff viewer\"": "title: \"关闭差异查看器\"",
-    "title: \"Move diff viewer down\"": "title: \"下移差异查看器\"",
-    "title: \"Move diff viewer up\"": "title: \"上移差异查看器\"",
-    "title: \"Page diff viewer down\"": "title: \"向下翻页\"",
-    "title: \"Page diff viewer up\"": "title: \"向上翻页\"",
-    "title: \"Toggle diff viewer item\"": "title: \"切换差异查看器项目\"",
-    "title: \"Expand diff viewer item\"": "title: \"展开差异查看器项目\""
+    "title: \"Move diff viewer down\"": "title: \"差异查看器向下移动\"",
+    "title: \"Move diff viewer up\"": "title: \"差异查看器向上移动\"",
+    "title: \"Page diff viewer down\"": "title: \"差异查看器向下翻页\"",
+    "title: \"Page diff viewer up\"": "title: \"差异查看器向上翻页\"",
+    "title: \"Toggle diff viewer item\"": "title: \"展开/折叠差异项\"",
+    "title: \"Expand diff viewer item\"": "title: \"展开差异项\"",
+    "title: \"Expand all diff viewer folders\"": "title: \"展开所有差异文件夹\"",
+    "title: \"Collapse diff viewer item\"": "title: \"折叠差异项\"",
+    "<text fg={theme().textMuted}>Loading diff...</text>": "<text fg={theme().textMuted}>正在加载差异...</text>",
+    "<text fg={theme().textMuted}>No diff!</text>": "<text fg={theme().textMuted}>无差异！</text>",
+    "<text fg={theme().error}>Failed to load diff</text>": "<text fg={theme().error}>加载差异失败</text>",
+    "<text fg={theme().textMuted}>No patch available for this file.</text>": "<text fg={theme().textMuted}>该文件暂无补丁。</text>",
+    "<text fg={theme.textMuted}>Description</text>": "<text fg={theme.textMuted}>说明</text>"
   }
 }

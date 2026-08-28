@@ -16,7 +16,7 @@
 2. 汉化后的 opencode 二进制（darwin-arm64）
 3. 部署到 `~/.opencode/bin/opencode`（该目录需在 PATH 中）
 
-**版本策略**：版本号严格跟随官方（当前官方 dev 分支 = v1.18.16）。
+**版本策略**：版本号严格跟随官方（当前官方 dev 分支 = v1.18.23）。
 汉化版 `opencode --version` 显示官方版本号，不发明任何自己的版本号。
 
 ---
@@ -161,7 +161,7 @@ diff -rq ~/opencode-zh-build/opencode-clean/opencode-dev/packages \
 ```bash
 OPENCODE_PROJECT_DIR=<skill 目录> \
 OPENCODE_SOURCE_DIR=<官方源码> \
-OPENCODE_VERSION=<官方版本号，如 1.18.16> \
+OPENCODE_VERSION=<官方版本号，如 1.18.23> \
   tools/opencode-cli build --platform darwin-arm64 --deploy=false
 ```
 
@@ -185,7 +185,7 @@ chmod +x ~/.opencode/bin/opencode
 ### 4.7 验收
 
 ```bash
-~/.opencode/bin/opencode --version        # 应显示官方版本号（如 1.18.16）
+~/.opencode/bin/opencode --version        # 应显示官方版本号（如 1.18.23）
 # 运行 opencode，抽查：命令面板（Ctrl+P）、对话框标题、侧边栏、帮助文本应为中文
 # 确认英文残留仅出现在：AI 对话内容、错误日志、少数未覆盖的二级菜单
 ```
@@ -269,7 +269,7 @@ chmod +x ~/.opencode/bin/opencode
 # 全部流程（源码已下载并解压到 ~/opencode-zh-build/opencode-dev 时）
 export OPENCODE_PROJECT_DIR=<skill 目录>
 export OPENCODE_SOURCE_DIR=~/opencode-zh-build/opencode-dev
-export OPENCODE_VERSION=1.18.16            # ← 每次换源码版本时更新！
+export OPENCODE_VERSION=1.18.23            # ← 每次换源码版本时更新！
 
 tools/opencode-cli apply                    # 1. 应用汉化（看命中统计！）
 bash scripts/check-misreplacements.sh       # 2. 误伤甄别

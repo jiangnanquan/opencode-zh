@@ -1,6 +1,6 @@
 {
   "file": "packages/tui/src/component/dialog-console-org.tsx",
-  "description": "人工补充: 遗漏 UI 文本",
+  "description": "自动迁移: packages/tui/src/component/dialog-console-org.tsx",
   "replacements": {
     "title=\"Switch org\"": "title=\"切换组织\""
   }

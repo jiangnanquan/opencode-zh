@@ -82,7 +82,7 @@ opencode --version              # 验收：显示官方版本号
 
 ## 汉化包（`opencode-i18n/`）
 
-- 44 个 JSON 配置，按源码位置分类：`dialogs/`（对话框）、`components/`（组件/侧边栏）、`routes/`（路由页）、`common/`（其余）
+- 47 个 JSON 配置，按源码位置分类：`dialogs/`（对话框）、`components/`（组件/侧边栏）、`routes/`（路由页）、`common/`（其余）
 - 格式：`{"file": "<仓库相对路径>", "replacements": {"原文": "译文"}}`，`file` 必须以 `packages/` 开头
 - 分类目录可任意调整，apply 会递归扫描
 - 更新官方源码后**不要手工改配置**，用 `scripts/migrate_i18n.py` 重定位

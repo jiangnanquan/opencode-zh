@@ -17,14 +17,17 @@ if [ ! -x "$TOOL" ]; then
   exit 1
 fi
 
-# 1. 下载官方最新源码
 step "1/6 获取官方最新源码 (dev)"
 mkdir -p "$BUILD_ROOT"
 curl -sL --connect-timeout 15 --max-time 300 -o "$TARBALL" \
   "https://codeload.github.com/anomalyco/opencode/tar.gz/refs/heads/dev"
 rm -rf "$SRC_DIR"
+EXTRACTED_DIR="$BUILD_ROOT/$(tar tzf "$TARBALL" | head -1 | cut -d/ -f1)"
+rm -rf "$EXTRACTED_DIR"
 tar xzf "$TARBALL" -C "$BUILD_ROOT"
-SRC_DIR="$BUILD_ROOT/$(tar tzf "$TARBALL" | head -1 | cut -d/ -f1)"
+if [ "$EXTRACTED_DIR" != "$SRC_DIR" ]; then
+  mv "$EXTRACTED_DIR" "$SRC_DIR"
+fi
 VERSION=$(grep '"version"' "$SRC_DIR/packages/cli/package.json" | head -1 | sed -E 's/.*"([0-9.]+)".*/\1/')
 echo "官方版本: $VERSION"
 

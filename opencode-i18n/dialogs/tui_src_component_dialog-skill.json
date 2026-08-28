@@ -1,10 +1,10 @@
 {
   "file": "packages/tui/src/component/dialog-skill.tsx",
-  "description": "自动迁移: packages/tui/src/component/dialog-skill.tsx",
+  "description": "技能选择对话框",
   "replacements": {
-    "placeholder: \"Search skills...\"": "placeholder: \"搜索技能...\"",
     "category: \"Skills\"": "category: \"技能\"",
     "title=\"Skills\"": "title=\"技能\"",
-    "placeholder=\"Search skills...\"": "placeholder=\"搜索技能...\""
+    "placeholder=\"Search skills...\"": "placeholder=\"搜索技能...\"",
+    "Could not load skills": "无法加载技能"
   }
 }
