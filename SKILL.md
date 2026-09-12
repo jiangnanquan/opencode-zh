@@ -1,5 +1,5 @@
 ---
-name: opencode-zh
+name: q-zh-opencode
 description: OpenCode CLI 界面汉化（简体中文）。下载官方最新源码 → 应用汉化包 → 误伤甄别 → 本地构建 darwin-arm64 → 部署到 ~/.opencode/bin。版本号严格跟随官方。适用场景：「汉化 opencode」「更新 opencode 汉化版」「重新生成汉化包」「opencode 中文界面」。只做 CLI UI 汉化，不碰 AI 行为、配置、插件等其他事项。
 ---
 
