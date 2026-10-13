@@ -1,6 +1,6 @@
 ---
 name: q-zh-opencode
-description: OpenCode CLI 界面汉化（简体中文）。下载官方最新源码 → 应用汉化包 → 误伤甄别 → 本地构建 darwin-arm64 → 部署到 ~/.opencode/bin。版本号严格跟随官方。适用场景：「汉化 opencode」「更新 opencode 汉化版」「重新生成汉化包」「opencode 中文界面」。只做 CLI UI 汉化，不碰 AI 行为、配置、插件等其他事项。
+description: OpenCode CLI 界面汉化（简体中文）——源码构建、汉化包、误伤甄别、部署到 ~/.opencode/bin。版本跟随官方。适用场景：「汉化 opencode」「更新 opencode 汉化版」「重新生成汉化包」「opencode 中文界面」。只做 CLI UI 汉化，不碰 AI 行为、配置、插件等其他事项。
 ---
 
 # OpenCode CLI 汉化（简体中文）
@@ -67,6 +67,11 @@ tools/opencode-cli build --platform darwin-arm64 --deploy=false
 bash scripts/deploy.sh          # 含 codesign 重签（macOS 26 必须）
 opencode --version              # 验收：显示官方版本号
 ```
+
+### 6. 交付闭环与 Git 提交/推送
+
+- 验收通过后，`git status` 确认仅有配置与文档修改，执行本地原子提交（`git commit -m "feat(compat): 增量适配 opencode $VERSION"`）；
+- 主动汇报验收证据与 commit 哈希，询问用户是否执行 `git push`；若用户指令已授权则直接 push 闭环。
 
 ## 红线清单（违反即坏，违反即返工）
 

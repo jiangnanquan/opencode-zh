@@ -277,3 +277,20 @@ tools/opencode-cli build --platform darwin-arm64 --deploy=false   # 3. 构建
 bash scripts/deploy.sh                      # 4. 部署
 ~/.opencode/bin/opencode --version          # 5. 验收
 ```
+
+---
+
+## 9. 交付闭环与 Git 提交/推送规程
+
+当完成汉化构建、误伤甄别与部署验收（`opencode --version` 正常输出）后：
+
+1. **清理与检查**：确认构建临时目录（`~/opencode-zh-build/`）无需提交进 Git，`git status` 仅包含 `opencode-i18n/` 配置与文档变更；
+2. **本地原子规范提交**：
+   ```bash
+   git add opencode-i18n/ scripts/ SKILL.md SOP.md
+   git commit -m "feat(compat): 增量适配 opencode <新版本号>"
+   ```
+3. **推送决策（主动询问 vs 授权主动推送）**：
+   - **默认策略（主动询问）**：向用户汇报汉化部署与验收结果，主动询问：“本地已规范提交完成（`<commit-hash>`），是否执行 `git push origin <branch>` 推送至远端？”；
+   - **授权策略（主动推送）**：若用户指令中已包含“提交并 push”、“自动推送”或随后明确授权，直接在当前终端执行 `git push origin <branch>` 并汇报远端同步结果。
+   - **红线**：误伤甄别未通过、签名未完成或存在未审计改动时，严禁提交或推送。
