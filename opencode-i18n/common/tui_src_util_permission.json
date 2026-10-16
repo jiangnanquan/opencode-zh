@@ -1,0 +1,16 @@
+{
+  "file": "packages/tui/src/util/permission.ts",
+  "description": "权限选项与提示文案",
+  "replacements": {
+    "if (option === \"once\") return \"Allow once\"": "if (option === \"once\") return \"仅允许一次\"",
+    "if (option === \"always\") return \"Always allow\"": "if (option === \"always\") return \"始终允许\"",
+    "if (option === \"reject\") return \"Reject\"": "if (option === \"reject\") return \"拒绝\"",
+    "if (option === \"confirm\") return \"Confirm\"": "if (option === \"confirm\") return \"确认\"",
+    "return \"Cancel\"": "return \"取消\"",
+    "title: \"Shell command\"": "title: \"Shell 命令\"",
+    "title: \"Continue after repeated failures\"": "title: \"连续失败后继续重试\"",
+    "lines: [\"This keeps the session running despite repeated failures.\"]": "lines: [\"即使连续失败仍保持会话继续运行。\"]",
+    "return [\"This will always allow the following patterns for this project.\", ...save.map((item) => `- ${item}`)]": "return [\"对于当前项目，将始终允许以下规则匹配项：\", ...save.map((item) => `- ${item}`)]",
+    "return [`This will always allow ${input.action} for this project.`]": "return [`对于当前项目，将始终允许执行 ${input.action}。`]"
+  }
+}

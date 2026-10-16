@@ -1,7 +1,0 @@
-{
-  "file": "packages/tui/src/component/dialog-console-org.tsx",
-  "description": "自动迁移: packages/tui/src/component/dialog-console-org.tsx",
-  "replacements": {
-    "title=\"Switch org\"": "title=\"切换组织\""
-  }
-}

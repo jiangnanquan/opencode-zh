@@ -1,15 +1,7 @@
 {
   "file": "packages/tui/src/routes/session/permission.tsx",
-  "description": "权限确认页面",
+  "description": "会话权限确认弹窗",
   "replacements": {
-    "title=\"Always allow\"": "title=\"总是允许\"",
-    "title=\"Permission required\"": "title=\"需要权限\"",
-    "options={{ once: \"Allow once\", always: \"Allow always\", reject: \"Reject\" }}": "options={{ once: \"允许一次\", always: \"总是允许\", reject: \"拒绝\" }}",
-    "title: \"Continue after repeated failures\"": "title: \"在多次失败后继续运行\"",
-    "<text fg={theme.textMuted}>This keeps the session running despite repeated failures.</text>": "<text fg={theme.textMuted}>即使多次失败也保持会话继续运行。</text>",
-    "<text fg={theme.textMuted}>No diff provided</text>": "<text fg={theme.textMuted}>未提供差异对比</text>",
-    "<text fg={theme.textMuted}>Patterns</text>": "<text fg={theme.textMuted}>规则模式</text>",
-    "<text fg={theme.text}>Permission required</text>": "<text fg={theme.text}>需要权限</text>",
-    "\"This will allow \" + props.request.permission + \" until OpenCode is restarted.\"": "\"在 OpenCode 重启前将一直允许 \" + props.request.permission + \"。\""
+    "<text fg={theme.text.muted}>No diff provided</text>": "<text fg={theme.text.muted}>未提供差异内容</text>"
   }
 }

@@ -1,7 +1,0 @@
-{
-  "file": "packages/tui/src/routes/session/dialog-fork-from-timeline.tsx",
-  "description": "自动迁移: packages/tui/src/routes/session/dialog-fork-from-timeline.tsx",
-  "replacements": {
-    "title=\"Fork session\"": "title=\"复制会话\""
-  }
-}

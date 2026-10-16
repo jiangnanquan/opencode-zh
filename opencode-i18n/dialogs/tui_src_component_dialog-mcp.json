@@ -1,12 +1,17 @@
 {
   "file": "packages/tui/src/component/dialog-mcp.tsx",
-  "description": "自动迁移: packages/tui/src/component/dialog-mcp.tsx",
+  "description": "MCP 服务器管理对话框",
   "replacements": {
-    "title=\"MCPs\"": "title=\"MCP服务器\"",
-    ">⋯ Loading</span>": ">⋯ 加载中</span>",
-    ">✓ Enabled</span>": ">✓ 已启用</span>",
-    ">○ Disabled</span>": ">○ 已禁用</span>",
-    "console.error(\"Failed to refresh MCP status: no data returned\")": "console.error(\"刷新 MCP 状态失败：未返回数据\")",
-    "console.error(\"Failed to toggle MCP:\", error)": "console.error(\"切换 MCP 失败：\", error)"
+    "return <>Connecting …</>": "return <>正在连接 …</>",
+    "<span style={{ attributes: TextAttributes.BOLD }}>Connected ✓</span>": "<span style={{ attributes: TextAttributes.BOLD }}>已连接 ✓</span>",
+    "return <>Failed !</>": "return <>连接失败 !</>",
+    "return <>Sign in required →</>": "return <>需要登录认证 →</>",
+    "return <>Disabled ○</>": "return <>已禁用 ○</>",
+    "if (status === \"connected\") return \"disconnect\"": "if (status === \"connected\") return \"断开连接\"",
+    "if (status === \"failed\") return \"retry\"": "if (status === \"failed\") return \"重试\"",
+    "if (status === \"needs_auth\") return \"sign in\"": "if (status === \"needs_auth\") return \"登录认证\"",
+    "return \"connect\"": "return \"连接\"",
+    "title=\"MCP servers\"": "title=\"MCP 服务器\"",
+    "title: \"view error\"": "title: \"查看错误\""
   }
 }

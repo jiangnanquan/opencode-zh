@@ -1,15 +1,10 @@
 {
   "file": "packages/tui/src/ui/dialog-select.tsx",
-  "description": "自动迁移: packages/tui/src/ui/dialog-select.tsx",
+  "description": "通用选择器对话框",
   "replacements": {
-    "<text fg={theme.textMuted}>No results found</text>": "<text fg={theme.textMuted}>未找到结果</text>",
-    "placeholder={props.placeholder ?? \"Search\"}": "placeholder={props.placeholder ?? \"搜索\"}",
-    "title: \"Page down\"": "title: \"向下翻页\"",
-    "title: \"Page up\"": "title: \"向上翻页\"",
-    "title: \"Previous item\"": "title: \"上一项\"",
+    "<text fg={theme.text.muted}>No results found</text>": "<text fg={theme.text.muted}>未找到匹配结果</text>",
     "title: \"Next item\"": "title: \"下一项\"",
-    "title: \"First item\"": "title: \"第一项\"",
-    "title: \"Last item\"": "title: \"最后一项\"",
-    "title: \"Select item\"": "title: \"选择项目\""
+    "title: \"Previous item\"": "title: \"上一项\"",
+    "title: \"Select item\"": "title: \"选择该项\""
   }
 }

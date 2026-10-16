@@ -2,9 +2,11 @@
   "file": "packages/tui/src/component/dialog-skill.tsx",
   "description": "技能选择对话框",
   "replacements": {
-    "category: \"Skills\"": "category: \"技能\"",
-    "title=\"Skills\"": "title=\"技能\"",
-    "placeholder=\"Search skills...\"": "placeholder=\"搜索技能...\"",
-    "Could not load skills": "无法加载技能"
+    "title=\"Skills\"": "title=\"技能列表\"",
+    "<text fg={theme.text.muted}>No skills available</text>": "<text fg={theme.text.muted}>无可用技能</text>",
+    "Could not load skills": "无法加载技能",
+    "<text fg={theme.text.muted}>Close and reopen Skills to try again.</text>": "<text fg={theme.text.muted}>关闭并重新打开技能对话框重试。</text>",
+    "<text fg={theme.text.muted}>Loading skills…</text>": "<text fg={theme.text.muted}>正在加载技能…</text>",
+    "<text fg={theme.text.muted}>No skills found</text>": "<text fg={theme.text.muted}>未找到匹配技能</text>"
   }
 }

@@ -1,0 +1,15 @@
+{
+  "file": "packages/tui/src/component/dialog-workspaces.tsx",
+  "description": "工作树(Worktrees)管理对话框",
+  "replacements": {
+    "title=\"Worktrees\"": "title=\"工作树\"",
+    "Could not load worktrees": "无法加载工作树",
+    "<text fg={theme.text.muted}>Loading worktrees…</text>": "<text fg={theme.text.muted}>正在加载工作树…</text>",
+    "<text fg={theme.text.muted}>No worktrees available</text>": "<text fg={theme.text.muted}>无可用工作树</text>",
+    "<text fg={theme.text.muted}>No worktrees found</text>": "<text fg={theme.text.muted}>未找到匹配工作树</text>",
+    "title: \"move\"": "title: \"移动\"",
+    "title: \"new\"": "title: \"新建\"",
+    "title: \"delete\"": "title: \"删除\"",
+    "title: \"refresh\"": "title: \"刷新\""
+  }
+}

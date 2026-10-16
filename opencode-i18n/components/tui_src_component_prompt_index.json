@@ -1,21 +1,8 @@
 {
   "file": "packages/tui/src/component/prompt/index.tsx",
-  "description": "自动迁移: packages/tui/src/component/prompt/index.tsx",
+  "description": "输入框组件",
   "replacements": {
-    "message: \"Connect a provider to send prompts\"": "message: \"连接提供商以发送提示\"",
-    "title: \"Clear prompt\"": "title: \"清除提示\"",
-    "title: \"Submit prompt\"": "title: \"提交提示\"",
-    "title: \"Paste\"": "title: \"粘贴\"",
-    "title: \"Interrupt session\"": "title: \"中断会话\"",
-    "title: \"Open editor\"": "title: \"打开编辑器\"",
-    "title: \"Stash prompt\"": "title: \"存储提示\"",
-    "title: \"Stash pop\"": "title: \"弹出存储\"",
-    "title: \"Stash list\"": "title: \"存储列表\"",
-    "title: \"Skills\"": "title: \"技能\"",
-    "category: \"Prompt\"": "category: \"提示\"",
-    "<span style={{ fg: theme.textMuted }}>agents</span>": "<span style={{ fg: theme.textMuted }}>智能体</span>",
-    "<span style={{ fg: theme.textMuted }}>commands</span>": "<span style={{ fg: theme.textMuted }}>命令</span>",
-    "<span style={{ fg: theme.textMuted }}>exit shell mode</span>": "<span style={{ fg: theme.textMuted }}>退出 shell 模式</span>",
-    "title: \"Move session\"": "title: \"移动会话\""
+    "title: \"Exit shell mode\"": "title: \"退出 Shell 模式\"",
+    "message: \"This prompt cannot be queued\"": "message: \"此提示词无法加入队列\""
   }
 }

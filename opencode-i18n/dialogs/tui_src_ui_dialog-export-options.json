@@ -1,14 +1,15 @@
 {
   "file": "packages/tui/src/ui/dialog-export-options.tsx",
-  "description": "自动迁移: packages/tui/src/ui/dialog-export-options.tsx",
+  "description": "导出会话选项对话框",
   "replacements": {
-    "placeholder=\"Enter filename\"": "placeholder=\"输入文件名\"",
-    "Export Options": "导出选项",
-    ">Filename:<": ">文件名:<",
-    "Include thinking": "包含思考过程",
-    "Include tool details": "包含工具详情",
-    "Include assistant metadata": "包含助手元数据",
-    "Open without saving": "不保存直接打开",
-    "for options": "查看选项"
+    "header={<DialogHeader title=\"Export session\" />}": "header={<DialogHeader title=\"导出会话\" />}",
+    "<text fg={overlayTheme.text.base}>Copy</text>": "<text fg={overlayTheme.text.base}>复制</text>",
+    ">\n              Export\n            </text>": ">\n              导出\n            </text>",
+    "<text fg={theme.text.base}>Export as:</text>": "<text fg={theme.text.base}>导出格式：</text>",
+    "title: \"Next export option\"": "title: \"下一个导出选项\"",
+    "title: \"Select export option\"": "title: \"选择导出选项\"",
+    ">\n              Include thinking\n            </text>": ">\n              包含思考过程\n            </text>",
+    ">\n              Include tools\n            </text>": ">\n              包含工具调用\n            </text>",
+    ">\n              Sanitize sensitive data\n            </text>": ">\n              脱敏敏感数据\n            </text>"
   }
 }

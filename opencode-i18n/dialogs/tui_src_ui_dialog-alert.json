@@ -1,7 +1,8 @@
 {
   "file": "packages/tui/src/ui/dialog-alert.tsx",
-  "description": "自动迁移: packages/tui/src/ui/dialog-alert.tsx",
+  "description": "警报对话框",
   "replacements": {
-    "<text fg={theme.selectedListItemText}>ok</text>": "<text fg={theme.selectedListItemText}>确定</text>"
+    "title: \"Confirm alert\"": "title: \"确认警报\"",
+    "<text fg={theme.text.action.primary.focused}>ok</text>": "<text fg={theme.text.action.primary.focused}>确定</text>"
   }
 }

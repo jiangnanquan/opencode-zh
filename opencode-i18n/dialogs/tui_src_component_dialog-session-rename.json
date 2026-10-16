@@ -1,7 +1,9 @@
 {
   "file": "packages/tui/src/component/dialog-session-rename.tsx",
-  "description": "自动迁移: packages/tui/src/component/dialog-session-rename.tsx",
+  "description": "会话重命名对话框",
   "replacements": {
-    "title=\"Rename Session\"": "title=\"重命名会话\""
+    "title=\"Rename session\"": "title=\"重命名会话\"",
+    "placeholder=\"Session title\"": "placeholder=\"会话标题\"",
+    "Failed to rename session:": "重命名会话失败："
   }
 }

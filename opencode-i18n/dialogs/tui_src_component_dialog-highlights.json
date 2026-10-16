@@ -1,0 +1,9 @@
+{
+  "file": "packages/tui/src/component/dialog-highlights.tsx",
+  "description": "版本亮点对话框",
+  "replacements": {
+    "header={<DialogHeader title={`What's new in ${props.version}`} />}": "header={<DialogHeader title={`v${props.version} 新特性与亮点`} />}",
+    "title: \"Close highlights\"": "title: \"关闭亮点\"",
+    "<text fg={theme.text.action.primary.focused}>ok</text>": "<text fg={theme.text.action.primary.focused}>确定</text>"
+  }
+}

@@ -1,10 +1,11 @@
 {
   "file": "packages/tui/src/feature-plugins/system/plugins.tsx",
-  "description": "自动迁移: packages/tui/src/feature-plugins/system/plugins.tsx",
+  "description": "系统插件列表与管理",
   "replacements": {
-    "title: \"toggle\"": "title: \"切换\"",
-    "title=\"Install plugin\"": "title=\"安装插件\"",
     "title=\"Plugins\"": "title=\"插件\"",
-    "placeholder=\"npm package name\"": "placeholder=\"npm 包名\""
+    "title: \"Toggle internal plugins\"": "title: \"切换内置插件显示\"",
+    "checking() ? \"checking for updates\" : \"check for updates\"": "checking() ? \"正在检查更新\" : \"检查更新\"",
+    "title: \"view error\"": "title: \"查看错误\"",
+    "title: \"update\"": "title: \"更新\""
   }
 }

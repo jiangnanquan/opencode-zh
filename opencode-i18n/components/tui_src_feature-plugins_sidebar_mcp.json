@@ -1,10 +1,9 @@
 {
   "file": "packages/tui/src/feature-plugins/sidebar/mcp.tsx",
-  "description": "侧边栏 MCP 状态",
+  "description": "侧边栏 MCP 状态显示",
   "replacements": {
-    ">Connected</Match>": ">已连接</Match>",
-    ">Disabled</Match>": ">已禁用</Match>",
-    ">Needs auth</Match>": ">需要认证</Match>",
-    ">Needs client ID</Match>": ">需要客户端 ID</Match>"
+    "<Match when={item.status.status === \"failed\"}>Error</Match>": "<Match when={item.status.status === \"failed\"}>错误</Match>",
+    "<Match when={item.status.status === \"disabled\"}>Disabled</Match>": "<Match when={item.status.status === \"disabled\"}>已禁用</Match>",
+    "<Match when={item.status.status === \"needs_auth\"}>Sign in</Match>": "<Match when={item.status.status === \"needs_auth\"}>登录认证</Match>"
   }
 }

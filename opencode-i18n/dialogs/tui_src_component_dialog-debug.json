@@ -2,6 +2,10 @@
   "file": "packages/tui/src/component/dialog-debug.tsx",
   "description": "调试信息对话框",
   "replacements": {
-    "<text fg={theme.textMuted}>Share this when reporting an issue.</text>": "<text fg={theme.textMuted}>反馈问题时请附带此信息。</text>"
+    "<DialogHeader title=\"Debug\" />": "<DialogHeader title=\"调试信息\" />",
+    "title: \"Copy debug info\"": "title: \"复制调试信息\"",
+    "title: copied() ? \"✓ copied\" : \"copy\"": "title: copied() ? \"✓ 已复制\" : \"复制\"",
+    "message: \"Debug info copied to clipboard\"": "message: \"调试信息已复制到剪贴板\"",
+    "<text fg={theme.text.muted}>Share this when reporting an issue.</text>": "<text fg={theme.text.muted}>提交问题反馈时请附带此信息。</text>"
   }
 }

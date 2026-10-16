@@ -1,7 +1,0 @@
-{
-  "file": "packages/tui/src/component/dialog-workspace-list.tsx",
-  "description": "自动迁移: packages/tui/src/component/dialog-workspace-list.tsx",
-  "replacements": {
-    "title=\"Workspaces\"": "title=\"工作区\""
-  }
-}

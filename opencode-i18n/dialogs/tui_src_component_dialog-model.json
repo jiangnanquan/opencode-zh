@@ -3,14 +3,10 @@
   "description": "模型选择对话框",
   "replacements": {
     "return \"Select model\"": "return \"选择模型\"",
-    "toOptions(favorites, \"Favorites\")": "toOptions(favorites, \"收藏\")",
-    "toOptions(\n      recents.filter(\n        (item) => !favorites.some((fav) => fav.providerID === item.providerID && fav.modelID === item.modelID),\n      ),\n      \"Recent\",\n    )": "toOptions(\n      recents.filter(\n        (item) => !favorites.some((fav) => fav.providerID === item.providerID && fav.modelID === item.modelID),\n      ),\n      \"最近使用\",\n    )",
-    "category: \"Popular providers\"": "category: \"热门服务商\"",
-    "title: connected() ? \"Connect provider\" : \"View all providers\"": "title: connected() ? \"连接服务商\" : \"查看所有服务商\"",
-    "title: \"Favorite\"": "title: \"收藏\"",
-    "? \"(Favorite)\"": "? \"（已收藏）\"",
-    "footer: model.cost?.input === 0 && provider.id === \"opencode\" ? \"Free\" : undefined": "footer: model.cost?.input === 0 && provider.id === \"opencode\" ? \"免费\" : undefined",
-    "footer: info.cost?.input === 0 && provider.id === \"opencode\" ? \"Free\" : undefined": "footer: info.cost?.input === 0 && provider.id === \"opencode\" ? \"免费\" : undefined",
-    "(option) => option.footer !== \"Free\"": "(option) => option.footer !== \"免费\""
+    "footer: free(model) ? \"Free\" : undefined": "footer: free(model) ? \"免费\" : undefined",
+    "toOptions(favorites, \"Favorites\")": "toOptions(favorites, \"收藏模型\")",
+    "\"Recent\",": "\"最近使用\",",
+    "title: connected() ? \"Connect an integration\" : \"View all integrations\"": "title: connected() ? \"连接新集成\" : \"查看全部集成\"",
+    "description: favorite ? \"(Favorite)\" : undefined": "description: favorite ? \"(已收藏)\" : undefined"
   }
 }

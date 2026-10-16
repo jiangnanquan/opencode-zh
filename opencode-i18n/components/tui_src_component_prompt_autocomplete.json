@@ -1,7 +1,12 @@
 {
   "file": "packages/tui/src/component/prompt/autocomplete.tsx",
-  "description": "自动迁移: packages/tui/src/component/prompt/autocomplete.tsx",
+  "description": "输入框自动补全",
   "replacements": {
-    "<text fg={theme.textMuted}>No matching items</text>": "<text fg={theme.textMuted}>未找到匹配项</text>"
+    "if (store.visible === \"command\") return \"No matching commands\"": "if (store.visible === \"command\") return \"未找到匹配命令\"",
+    "if (files.loading) return \"Searching…\"": "if (files.loading) return \"正在搜索…\"",
+    "if (fileSearch.failed) return \"Could not search directories. Keep typing to try again.\"": "if (fileSearch.failed) return \"无法搜索目录，请继续输入以重试。\"",
+    "return \"No matching directories\"": "return \"未找到匹配目录\"",
+    "if (fileSearch.failed) return \"Could not search files. Keep typing to try again.\"": "if (fileSearch.failed) return \"无法搜索文件，请继续输入以重试。\"",
+    "return \"No matching files, agents, or references\"": "return \"未找到匹配的文件、智能体或引用\""
   }
 }

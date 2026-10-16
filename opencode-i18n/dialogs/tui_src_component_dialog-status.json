@@ -1,12 +1,10 @@
 {
   "file": "packages/tui/src/component/dialog-status.tsx",
-  "description": "状态查看对话框",
+  "description": "状态概览对话框",
   "replacements": {
-    "No MCP Servers": "无 MCP 服务器",
-    "MCP Servers": "MCP 服务器",
-    "Disabled in configuration</Match>": "在配置中已禁用</Match>",
-    "Needs authentication": "需要身份验证",
-    "LSP Servers": "LSP 服务器",
-    "<text fg={theme.text}>No Plugins</text>": "<text fg={theme.text}>无插件</text>"
+    "header={<DialogHeader title=\"Status\" />}": "header={<DialogHeader title=\"状态\" />}",
+    "<text fg={theme.text.base}>No MCP servers</text>": "<text fg={theme.text.base}>无 MCP 服务器</text>",
+    "<Match when={item.status.status === \"connected\"}>Connected</Match>": "<Match when={item.status.status === \"connected\"}>已连接</Match>",
+    "<Match when={item.status.status === \"disabled\"}>Disabled in configuration</Match>": "<Match when={item.status.status === \"disabled\"}>已在配置中禁用</Match>"
   }
 }

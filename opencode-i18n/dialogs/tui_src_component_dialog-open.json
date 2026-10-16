@@ -1,0 +1,11 @@
+{
+  "file": "packages/tui/src/component/dialog-open.tsx",
+  "description": "打开会话或项目对话框",
+  "replacements": {
+    "placeholder={projectID() ? \"Search worktrees…\" : \"Search sessions and projects…\"}": "placeholder={projectID() ? \"搜索工作树…\" : \"搜索会话与项目…\"}",
+    "<text fg={theme.text.muted}>No recent sessions or projects</text>": "<text fg={theme.text.muted}>无最近会话或项目</text>",
+    "<Spinner color={theme.text.muted}>Loading worktrees…</Spinner>": "<Spinner color={theme.text.muted}>正在加载工作树…</Spinner>",
+    "<Spinner color={theme.text.muted}>Refreshing sessions and projects…</Spinner>": "<Spinner color={theme.text.muted}>正在刷新会话与项目…</Spinner>",
+    "title: \"Show project worktrees\"": "title: \"显示项目工作树\""
+  }
+}
