@@ -1,0 +1,25 @@
+{
+  "name": "opencode-zh",
+  "version": "2.0.0",
+  "description": "OpenCode TUI 简体中文汉化插件：在渲染层按词典精确匹配翻译界面文字，跟随官方版本、无需重新编译",
+  "type": "module",
+  "exports": {
+    "./tui": "./tui.js"
+  },
+  "files": [
+    "tui.js",
+    "translate.js",
+    "dict.json"
+  ],
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "i18n",
+    "chinese",
+    "simplified-chinese",
+    "localization",
+    "tui",
+    "汉化"
+  ],
+  "license": "MIT"
+}
