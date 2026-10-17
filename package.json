@@ -9,7 +9,9 @@
   "files": [
     "tui.js",
     "translate.js",
-    "dict.json"
+    "dict.json",
+    "server.js",
+    "rpc.js"
   ],
   "keywords": [
     "opencode",

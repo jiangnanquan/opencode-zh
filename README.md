@@ -1,17 +1,17 @@
 # opencode-zh — OpenCode CLI 简体中文汉化
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-macOS%20(Apple%20Silicon)-lightgrey.svg)](#)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg)](#)
+[![OpenCode](https://img.shields.io/badge/OpenCode-v2.0.x%20(v2.0.32)-brightgreen.svg)](#)
 
-> 一个 **OpenCode TUI 汉化插件**：在渲染层按词典精确匹配翻译界面文字，**零侵入、跟随官方版本、
-> 无需重新编译**。只做 UI 汉化，不碰模型配置与 AI 行为。
+> 一个 **OpenCode TUI 汉化插件**：在渲染层按词典精确匹配翻译界面文字，**零侵入、跟随官方版本、无需重新编译**。只做 UI 汉化，不碰模型配置与 AI 行为。
 
 ## 这是什么
 
 - **汉化插件**：`tui.js`（渲染层 hook）+ `translate.js`（翻译器）+ `dict.json`（1498 条词典）
 - **一键安装**：`bash scripts/install.sh` 写入 `~/.config/opencode/cli.json`，重启即生效
 - **零侵入**：运行时 hook `@opentui/core` 的渲染主路径，不改二进制、不重编译
-- **跟随官方**：官方升级后通常只需更新词典，无需重新编译重签名
+- **跟随官方**：官方升级后通常只需更新词典，无需重新编译重签名（已验证兼容至 `v2.0.32`）
 - **AI 友好**：整个仓库是 skill（`SKILL.md` 为唯一入口），任何 AI agent 按它即可独立维护
 
 ## 安装
@@ -23,6 +23,17 @@ bash scripts/install.sh    # 写入 cli.json，重启 opencode 生效
 ```
 
 部署后运行 `opencode`，命令面板、对话框标题、按钮等应为中文。
+
+**验证与排查：**
+查看插件初始化日志，确认各 Hook 拦截点正常注册：
+```bash
+cat /tmp/opencode-zh-plugin.log
+```
+
+## 个性化与高级配置
+
+- **自定义词典覆盖**：可在 `~/.config/opencode/opencode-zh-overrides.json` 中配置个性化键值对，插件加载时会自动优先合并覆盖内置词典。
+- **未翻译词条捕获（审计模式）**：在插件选项中开启 `audit: true`，运行时未翻译的英文文案会自动收集至 `/tmp/opencode-zh-audit.log`，方便快速定位新增词条。
 
 ## 更新词典（官方升级或补词后）
 
