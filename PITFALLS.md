@@ -1,48 +1,88 @@
 # 踩坑记录与故障排查
 
-## 已踩过的坑（历史沉淀）
+## 当前路线（插件式 hook）踩坑
 
-### 1. 旧汉化项目停更根因（2026-03 起）
-`1186258278/OpenCodeChineseTranslation` 的 nightly 流水线用
-`git clone --depth 200` 浅克隆 + `git rev-list --count` 计算上游差异，
-commit 数超过 200 后 rev-list 必然失败，错误被 `|| echo "0"` 吞掉 →
-COMMIT_COUNT 恒为 0 → 永久跳过构建。修复：用 GitHub API compare 接口替代。
+### 1. OpenCode 2.0.30 的 Host.resolve bug（最关键）
 
-### 2. 旧配置全部失效原因
-旧版 TUI 在 `packages/opencode/src/cli/cmd/tui/`，v1.18.x 重构为独立包
-`packages/tui/src/`。文件路径全变但界面文案大多保留——`migrate_i18n.py`
-实测可找回 77%（308/405 条）。
+`opencode plugin add` 对纯 TUI 插件（只有 `./tui` 导出、无 server 入口）报
+`ResolveMessage: Cannot find module '.../server'`。
 
-### 3. 简单单词规则误伤（最危险）
-迁移的宽容匹配会把 `native`、`delete`、`interrupted` 这类单词生成「简单单词规则」，
-工具按单词边界匹配，命中 `@typescript/native-preview`、SQL 类型 `"delete"` 等代码标识符，
-导致 bun install 失败 / 运行逻辑损坏。**必须删除所有纯小写简单单词规则**。
+**根因**：`packages/plugin/src/host.ts` 的 `Host.resolve` 里，`Bun.resolveSync` 对缺失模块抛的
+`ResolveMessage` **不是 `Error` 子类**（`instanceof Error === false`），而 catch 逻辑第一条件就是
+`!(error instanceof Error)` → 直接 rethrow，而非按预期 catch 后返回 undefined。
 
-### 4. macOS 26 代码签名
-Bun 编译产物是 `linker-signed` adhoc 签名，macOS 26+ 的 taskgated 启动即
-SIGKILL（`zsh: killed`、崩溃报告 `Taskgated Invalid Signature`）。
-部署前必须：`codesign --force -s - <二进制>`（deploy.sh 已内置）。
-注意：构建脚本内的 smoke test 不能作为签名有效依据。
+**影响**：所有纯 TUI 插件（含社区 `opencode-zh-hans`）在 2.0.30 上都无法用 `opencode plugin add`
+安装。
 
-### 5. 同文案多文件副本
-同一 UI 文案可能出现在多个文件（如 `title="Switch org"` 在
-`dialog-console-org.tsx` 和 `app.tsx` 各一处）。补充规则后要全文搜索确认
-没有其他副本遗漏。
+**绕过**：插件目录提供 `server.js` + `rpc.js` 占位（导出空 `Plugin.define`），让 `Host.resolve`
+的 server/tui/rpc 三入口都能解析、不 rethrow；再用 `scripts/install.sh` 直接编辑 cli.json 的
+plugins 数组指向本地目录（绕过 `plugin add` 命令）。
 
-### 6. tarball 无 git 仓库
-官方源码用 tarball 下载（codeload），构建脚本执行 `git branch --show-current`
-会失败。必须设置 `OPENCODE_VERSION=<版本号>` 环境变量跳过。
+**相关 issue**：[#52300](https://github.com/anomalyco/opencode/issues/52300)。
 
-### 7. 跨平台交叉构建不可行
-bun 1.3.8 无 `windows-aarch64` target，`bun install` 解析失败。只构建
-当前平台（darwin-arm64）。
+### 2. 覆盖边界：自定义 framebuffer 渲染组件
+
+`FadeInText` / `MaskedTextRenderable` / `shimmer-text` / `title-shimmer` 等组件继承
+`TextRenderable` 但通过 `drawTextBuffer` 直接操作 framebuffer，**不经过
+`TextBuffer.setText/setStyledText`**，其文本不被 hook 覆盖，仍是英文。
+
+**识别**：`grep -rn "extends.*Renderable" packages/tui/src/` 找自定义 Renderable。
+
+**处理**：接受为设计边界，后续按需补 hook 或补词典。
+
+### 3. `setText` 是按值传递，before 钩子无法改写实参
+
+`TextBuffer.setText(text)` 的 `text` 是按值传递，普通的 before 钩子（`before(...args)`）无法改写
+原方法收到的实参。必须用「改写第一个参数后再调原方法」的包装（见 `tui.js` 的 `patchTextMethod`）。
+
+### 4. 词典 key 必须是「渲染层完整字符串」
+
+运行时 `TextBuffer` 收到的 chunk.text 是「拼接后的完整串」，可能含前导空格、`\n`、状态标记
+（如 `" New session"`、`"\n\n**Session ID:** "`）。词典 key 必须与之一一对应，否则无法命中。
+参考社区词典（`opencode-zh-hans/dict.json`）的 key 形态。
 
 ## 故障排查
 
 | 症状 | 原因 | 解决 |
 |---|---|---|
-| `zsh: killed` | 签名无效 | `codesign --force -s - ~/.opencode/bin/opencode` |
-| apply 显示「0 成功 42 跳过」 | 用了内置旧配置（外部目录没找到） | 确认 `opencode-i18n/` 在项目根、`OPENCODE_PROJECT_DIR` 正确 |
-| `@typescript/原生-preview failed to resolve` | 毒规则（简单单词） | 删配置里的规则 + 恢复源码 |
-| 构建报「不是 git 仓库」 | 缺 OPENCODE_VERSION | `export OPENCODE_VERSION=1.18.16` |
-| 二进制搜不到中文字符串 | Bun 编译压缩存储，grep 不可靠 | 以源码 grep + 实际运行验收为准 |
+| 插件日志无 setup 记录 | 插件未加载 | 检查 cli.json 的 plugins 数组是否含本插件路径；看 reconcile 日志 plugins 数是否 +1 |
+| `Unterminated string literal` | tui.js 语法错误（转义破坏） | `node --check tui.js` 校验 |
+| `Cannot find module '.../server'` | Host.resolve bug（缺占位入口） | 确认 server.js / rpc.js 存在 |
+| 界面仍是英文 | hook 未生效或词典缺词 | 看 `/tmp/opencode-zh-plugin.log` 是否注册成功；开审计模式（options.audit=true）看未命中文本 |
+| 某词条不翻译 | 词典 key 与运行时字符串不一致 | 开审计模式抓未命中文本，核对完整字符串（含空格/换行） |
+
+---
+
+## 旧路线（源码 AST 编译）踩坑（已停用，历史存档）
+
+以下为早期「源码 AST 汉化 + Bun 重编译」路线的踩坑，随路线切换已停用，仅存档供参考。
+
+### 旧坑 1：简单单词规则误伤
+源码替换的宽容匹配会把 `native`、`delete` 生成「简单单词规则」，按单词边界命中
+`@typescript/native-preview`、SQL 类型 `"delete"`，导致 bun install 失败 / 逻辑损坏。
+
+### 旧坑 2：macOS 26 代码签名
+Bun 编译产物是 `linker-signed` adhoc 签名，macOS 26+ taskgated 启动即 SIGKILL，需
+`codesign --force -s - <二进制>`。
+
+### 旧坑 3：旧配置失效
+旧 TUI 在 `packages/opencode/src/cli/cmd/tui/`，v1.18.x 重构为独立包 `packages/tui/src/`，
+文件路径全变但文案大多保留。
+
+### 旧坑 4：启动卡在「Loading plugins…」
+见下（该坑在新旧路线下都适用）。
+
+## 启动卡在「Loading plugins…」—— 与汉化无关（跨路线通用）
+
+OpenCode V2 引入插件系统后，TUI 启动会执行插件协调（reconcile），`plugins.ready()` 就绪前
+`startup-loading.tsx` 一直显示「Loading plugins…」。若外部插件（cli.json 的 plugins 数组，或
+`.config/opencode/plugins/` 下的旧 `.js`）加载/安装卡住，界面会永久停留此提示。
+
+**根因定位**：看日志 `~/.local/share/opencode/log/opencode.log`，找
+`plugin operation stalled ... stage=prepare ... install=true`（npm 安装网络超时）或
+`failed to load plugin ... Plugin must export a default definition`（1.x 旧插件不兼容 V2）。
+
+**解决**：
+- 移除 `~/.config/opencode/cli.json` 中卡住的插件条目；
+- 清理 `~/.cache/opencode/npm/<pkg>/` 下的 `.staging-*` 空目录残留；
+- 或临时 `opencode --pure`（官方「不加载外部插件」启动参数）验证。

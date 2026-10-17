@@ -90,6 +90,31 @@ function patchMethod(Cls, method, before, label, restore) {
   log(`${label}：注册成功`)
 }
 
+/**
+ * 包装「第一个参数是字符串」的原型方法，把翻译后的字符串作为新实参传给原方法。
+ * 用于 TextBuffer.setText(text) 这类按值传递、before 钩子无法改写实参的场景。
+ */
+function patchTextMethod(Cls, method, transform, label, restore) {
+  if (typeof Cls?.prototype?.[method] !== "function") {
+    log(`${label}：方法不存在，跳过`)
+    return
+  }
+  const original = Cls.prototype[method]
+  Cls.prototype[method] = function (text, ...rest) {
+    let next = text
+    try {
+      next = transform(text)
+    } catch {
+      // 降级为原值
+    }
+    return original.call(this, next, ...rest)
+  }
+  restore.push(() => {
+    Cls.prototype[method] = original
+  })
+  log(`${label}：注册成功`)
+}
+
 export default Plugin.define({
   id: "opencode-zh",
   setup(context) {
@@ -125,6 +150,20 @@ export default Plugin.define({
           }
         },
         "TextBuffer.setStyledText",
+        restore,
+      )
+
+      // 纯文本（无样式）走 TextBuffer.setText，而非 setStyledText。
+      // 这是大量 UI 文案（FadeInText/Text/span 等无样式文本）的渲染路径，
+      // 补 hook 可大幅提升覆盖。setText 接收字符串，直接精确匹配翻译。
+      patchTextMethod(
+        core.TextBuffer,
+        "setText",
+        (text) => {
+          auditText(text)
+          return translator.translate(text)
+        },
+        "TextBuffer.setText",
         restore,
       )
 

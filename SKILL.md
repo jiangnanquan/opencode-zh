@@ -1,105 +1,87 @@
 ---
 name: q-zh-opencode
-description: OpenCode CLI 界面汉化（简体中文）——源码构建、汉化包、误伤甄别、部署到 ~/.opencode/bin。版本跟随官方。适用场景：「汉化 opencode」「更新 opencode 汉化版」「重新生成汉化包」「opencode 中文界面」。只做 CLI UI 汉化，不碰 AI 行为、配置、插件等其他事项。
+description: OpenCode CLI 界面汉化（简体中文）——TUI 渲染层 hook 插件，零侵入、跟随官方版本、无需重新编译。适用场景：「汉化 opencode」「更新 opencode 汉化版」「opencode 中文界面」。只做 CLI/TUI UI 汉化，不碰 AI 行为、配置、插件等其他事项。
 ---
 
 # OpenCode CLI 汉化（简体中文）
 
-把 opencode（terminal AI coding agent，官方仓库 `anomalyco/opencode`）的 **CLI/TUI 界面文字**
-汉化为简体中文并构建部署。**只做这一件事**：UI 汉化。其余（模型配置、工作流、agent 行为）不负责。
+把 opencode（terminal AI coding agent，官方仓库 `anomalyco/opencode`）的 **TUI 界面文字**汉化为
+简体中文。**技术路线**：TUI 渲染层运行时 hook 插件——在 `@opentui/core` 的渲染主路径上按词典
+精确匹配翻译，**不改二进制、不重编译、跟随官方版本**（与 Claude Code 的 Mods 运行时钩子同范式）。
 
-## 快速开始（一条命令）
+**只做这一件事**：UI 汉化。其余（模型配置、工作流、agent 行为）不负责。
 
-```bash
-bash scripts/localize.sh
-```
-
-脚本自动执行完整流程：下载官方最新源码 → 迁移汉化配置 → 应用 → 误伤甄别 → 构建 → 部署到 `~/.opencode/bin`。适用于日常「官方更新后重新汉化」。
-
-## 手动流程（分步执行，便于调试）
-
-### 0. 准备
-
-- 汉化工具 `tools/opencode-cli`（缺失时先 `bash scripts/build-tool.sh`）
-- 网络：`github.com` 在部分地区直连超时，环境要求见 SOP 第 7 节
-
-### 1. 获取官方最新源码
+## 快速使用
 
 ```bash
-mkdir -p ~/opencode-zh-build && cd ~/opencode-zh-build
-curl -sL -o opencode-dev.tar.gz "https://codeload.github.com/anomalyco/opencode/tar.gz/refs/heads/dev"
-tar xzf opencode-dev.tar.gz
-VERSION=$(grep '"version"' opencode-dev/packages/cli/package.json | head -1 | sed -E 's/.*"([0-9.]+)".*/\1/')
-echo "官方版本: $VERSION"
+# 安装/更新汉化插件（写入 ~/.config/opencode/cli.json 的 plugins 数组）
+bash scripts/install.sh
+
+# 重启 opencode 即生效
+opencode
 ```
 
-### 2. 更新汉化配置（官方更新后必做）
+插件加载日志见 `/tmp/opencode-zh-plugin.log`。验证：命令面板、对话框标题、按钮等应为中文。
+
+## 项目结构
+
+```
+opencode-zh/              ← 仓库根 = 插件包根
+├── SKILL.md              ★ 唯一入口（AI agent 读它即可完成全部工作）
+├── package.json          插件元数据（exports "./tui"）
+├── tui.js                ★ 渲染层 hook（TextBuffer.setText / setStyledText / placeholder）
+├── translate.js          精确匹配翻译器（含动态正则规则）
+├── dict.json             ★ 运行时词典（1498 条，融合社区 + 自产）
+├── server.js / rpc.js    占位入口（绕过 OpenCode 2.0.30 的 Host.resolve bug）
+├── opencode-i18n/        自产词条源（444 条源码规则，构建输入）
+├── scripts/
+│   ├── install.sh        ★ 一键安装/更新
+│   ├── extract_dict.py   自产规则 → 纯字符串词条（dict-own.json）
+│   └── build-dict.py     融合社区词典 + 自产词典 → dict.json
+├── SOP.md                参考手册（格式规范、环境、踩坑）
+├── PITFALLS.md           踩坑记录与故障排查
+└── README.md             面向人类的项目说明
+```
+
+## 更新词典（官方升级或补词后）
 
 ```bash
-python3 scripts/migrate_i18n.py ~/opencode-zh-build/opencode-dev
+# 1. 从 opencode-i18n 的源码规则提取纯字符串词条 → dict-own.json
+python3 scripts/extract_dict.py
+
+# 2. 融合社区词典（默认 /tmp/oc-zh-hans-ref/dict.json）与自产词典 → dict.json
+python3 scripts/build-dict.py
+
+# 3. 重新安装（install.sh 幂等）
+bash scripts/install.sh
 ```
 
-- 命中率 ≥70% 可接受；未命中规则打印后人工决定补写
-- 迁移后配置写回 `opencode-i18n/`（注意：迁移可能生成「简单单词」毒规则，见步骤 4）
+社区词典获取（一次性）：`gh api` 拉取 `xlht4106/opencode-zh-hans` 的 `dict.json`，
+放到 `/tmp/oc-zh-hans-ref/dict.json`（或 `scripts/build-dict.py` 的第一个参数）。
 
-### 3. 应用汉化
+## 汉化原理（简要）
 
-```bash
-export OPENCODE_PROJECT_DIR=<本目录> OPENCODE_SOURCE_DIR=~/opencode-zh-build/opencode-dev
-tools/opencode-cli apply
-```
+1. `tui.js` 在插件 `setup` 阶段 hook `@opentui/core` 的渲染主路径：
+   - `TextBuffer.setText(text)` —— 纯文本渲染（无样式，覆盖大部分 UI 文案）
+   - `TextBuffer.setStyledText(StyledText)` —— 带样式文本（`styled.chunks[].text`）
+   - `InputRenderable.placeholder` / `TextareaRenderable.placeholder` —— 输入框占位符
+2. `translate.js` 做**完整字符串精确匹配**（词典 `{ "原文": "译文" }`），另加受控的
+   动态正则规则（如 `5m ago` → `5分钟前`）。
+3. 只按完整字符串匹配，不按单词边界，**天然规避「简单单词误伤」**（不会误翻包名/类型）。
+4. hook 失效时静默降级回英文，不崩溃。
 
-**必须检查命中统计**：预期 `文件: N 成功`、`替换: X/Y 成功`。全 0 说明配置路径失效。
+## 已知边界
 
-### 4. 误伤甄别（必做）
+hook 方案无法覆盖 100% 界面文本：少数走自定义 framebuffer 渲染的组件（如 `FadeInText`/
+`MaskedTextRenderable`）不经过 `TextBuffer`，其文本仍是英文。这是接受的设计边界，
+通过补词典 / 补 hook 逐步收敛。
 
-```bash
-bash scripts/check-misreplacements.sh
-```
+## 红线（违反即坏）
 
-对列出的非 `tui/src` 改动逐条确认。**红线命中立即恢复**（见下方红线清单）。
-
-### 5. 构建 + 部署 + 验收
-
-```bash
-export OPENCODE_VERSION=$VERSION
-tools/opencode-cli build --platform darwin-arm64 --deploy=false
-bash scripts/deploy.sh          # 含 codesign 重签（macOS 26 必须）
-opencode --version              # 验收：显示官方版本号
-```
-
-### 6. 交付闭环与 Git 提交/推送
-
-- 验收通过后，`git status` 确认仅有配置与文档修改，执行本地原子提交（`git commit -m "feat(compat): 增量适配 opencode $VERSION"`）；
-- 主动汇报验收证据与 commit 哈希，询问用户是否执行 `git push`；若用户指令已授权则直接 push 闭环。
-
-## 红线清单（违反即坏，违反即返工）
-
-只改 UI 展示文本（JSX 文本属性、对话框、菜单、按钮、toast、帮助文本）。**禁止**：
-
-| 红线 | 案例 | 后果 |
-|---|---|---|
-| TS 类型字符串字面量 | `"Unknown"` → `"未知"` | 类型判断失效 |
-| SQL/数据库操作类型 | `"delete"` → `"删除"` | 数据库操作无法识别 |
-| npm 包名/依赖声明 | `@typescript/native-preview` | bun install 直接失败 |
-| AI prompt 模板 | `add "(Recommended)"...` | 改变 AI 行为 |
-| **纯小写简单单词规则**（工具按单词边界匹配） | `"native"→"原生"` 命中包名里的 native | 必须删除，只允许带代码上下文的规则 |
-
-## 汉化包（`opencode-i18n/`）
-
-- 47 个 JSON 配置，按源码位置分类：`dialogs/`（对话框）、`components/`（组件/侧边栏）、`routes/`（路由页）、`common/`（其余）
-- 格式：`{"file": "<仓库相对路径>", "replacements": {"原文": "译文"}}`，`file` 必须以 `packages/` 开头
-- 分类目录可任意调整，apply 会递归扫描
-- 更新官方源码后**不要手工改配置**，用 `scripts/migrate_i18n.py` 重定位
+只改 UI 展示文本。**禁止**改动：模型名、专有概念（Warp 等）、代码标识符、AI prompt 模板。
+词典只做「完整字符串 → 中文」映射，不做任何单词边界或正则的宽泛替换（动态正则规则需逐条审）。
 
 ## 详细参考
 
-- `SOP.md` — 完整操作规程、格式规范、环境要求、历史踩坑记录（执行前通读）
-- `PITFALLS.md` — 红线案例与故障排查
-
-## 项目维护原则
-
-1. 只维护：汉化包（`opencode-i18n/`）、脚本（`scripts/`）、文档
-2. 版本号严格跟随官方，不发明自己的版本号
-3. 模型名、专有概念（Warp 等）不汉化
-4. 给其他 AI agent 交付时：让它读本文件（SKILL.md）即可独立完成整个流程
+- `SOP.md` —— 完整操作规程、格式规范、环境要求、历史踩坑记录
+- `PITFALLS.md` —— 红线案例与故障排查
