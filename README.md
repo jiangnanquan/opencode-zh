@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg)](#)
-[![OpenCode](https://img.shields.io/badge/OpenCode-v2.0.x%20(v2.0.32)-brightgreen.svg)](#)
+[![OpenCode](https://img.shields.io/badge/OpenCode-v2.1.x%20(v2.1.4)-brightgreen.svg)](#)
 
 > 一个 **OpenCode TUI 汉化插件**：在渲染层按词典精确匹配翻译界面文字，**零侵入、跟随官方版本、无需重新编译**。只做 UI 汉化，不碰模型配置与 AI 行为。
 
@@ -11,7 +11,7 @@
 - **汉化插件**：`tui.js`（渲染层 hook）+ `translate.js`（翻译器）+ `dict.json`（1498 条词典）
 - **一键安装**：`bash scripts/install.sh` 写入 `~/.config/opencode/cli.json`，重启即生效
 - **零侵入**：运行时 hook `@opentui/core` 的渲染主路径，不改二进制、不重编译
-- **跟随官方**：官方升级后通常只需更新词典，无需重新编译重签名（已验证兼容至 `v2.0.32`）
+- **跟随官方**：官方升级后通常只需更新词典，无需重新编译重签名（已验证兼容至 `v2.1.4`）
 - **AI 友好**：整个仓库是 skill（`SKILL.md` 为唯一入口），任何 AI agent 按它即可独立维护
 
 ## 安装
